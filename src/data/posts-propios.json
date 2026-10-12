@@ -1,0 +1,144 @@
+[
+  {
+    "slug": "recomprimir-video-familiar-ffmpeg",
+    "category": "Homelab",
+    "featured": true,
+    "title": "Recomprimir 27 horas de video familiar con ffmpeg (y todo lo que la receta popular hace mal)",
+    "shortTitle": "27 horas de video con ffmpeg",
+    "description": "55 GiB de cintas digitalizadas quedaron en 32 GiB sin pérdida visible. Por el camino, cuatro de cinco decisiones salieron al revés de lo que recomienda todo el mundo.",
+    "date": "2026-09-18",
+    "readingTime": "8 min",
+    "cover": "/blog/recomprimir-video-familiar-ffmpeg/portada.webp",
+    "tags": [
+      "ffmpeg",
+      "Video",
+      "GPU"
+    ],
+    "type": "entrada"
+  },
+  {
+    "slug": "pihole-no-le-servia-dns-a-nadie",
+    "category": "Homelab",
+    "featured": false,
+    "title": "Mi Pi-hole llevaba meses sin servirle DNS a nadie (y decía estar healthy)",
+    "shortTitle": "Pi-hole sin servir DNS",
+    "description": "Fui a revisar por qué Nextcloud no sincronizaba y terminé descubriendo un Pi-hole sin puertos, el puerto 53 tomado por systemd-resolved y unos respaldos que casi quedan guardando carpetas vacías.",
+    "date": "2026-09-26",
+    "readingTime": "3 min",
+    "cover": "/blog/pihole-no-le-servia-dns-a-nadie/portada.webp",
+    "tags": [
+      "Pi-hole",
+      "DNS",
+      "Docker",
+      "Tailscale"
+    ],
+    "type": "entrada"
+  },
+  {
+    "slug": "btrfs-sin-espacio-con-espacio-libre",
+    "category": "Homelab",
+    "featured": false,
+    "title": "btrfs dice que no hay espacio, pero df dice que sí: qué está pasando",
+    "shortTitle": "btrfs sin espacio",
+    "description": "Mi disco del sistema llegó a tener 1 GiB sin asignar mientras df mostraba cientos libres. Por qué pasa en btrfs, qué número mirar y cómo dejar que el kernel lo resuelva solo.",
+    "date": "2026-09-17",
+    "readingTime": "5 min",
+    "cover": "/blog/btrfs-sin-espacio-con-espacio-libre/portada.webp",
+    "tags": [
+      "btrfs",
+      "Linux",
+      "CachyOS"
+    ],
+    "type": "entrada"
+  },
+  {
+    "slug": "wlaque-cl",
+    "type": "proyecto",
+    "category": "Astro",
+    "featured": false,
+    "title": "wlaque.cl",
+    "description": "Lo diseñé en Claude Design y lo construyó un equipo raro: Claude Code de jefe de obra y un modelo que corre en mi propia GPU de desarrollador. Yo puse la pregunta, las reglas y la última palabra.",
+    "date": "2026-10-12",
+    "readingTime": "7 min",
+    "cover": null,
+    "tags": [
+      "Claude Code",
+      "OpenCode",
+      "Cloudflare"
+    ],
+    "project": {
+      "state": "en línea",
+      "since": "2026 →",
+      "stack": "Astro · Cloudflare Workers · Claude Code · OpenCode",
+      "kind": "Personal"
+    }
+  },
+  {
+    "slug": "laboratorio-pentesting",
+    "type": "proyecto",
+    "category": "Ciberseguridad",
+    "featured": false,
+    "title": "Laboratorio de pentesting",
+    "description": "Laboratorio KVM en mi desktop: Kali contra máquinas vulnerables en una red aislada, sin salida a internet ni a mi casa.",
+    "date": "2026-09-19",
+    "readingTime": "2 min",
+    "cover": null,
+    "tags": [],
+    "project": {
+      "state": "en curso",
+      "since": "2026 →",
+      "stack": "KVM · libvirt · Kali · Metasploitable 2",
+      "kind": "Estudio"
+    },
+    "body": [
+      "Máquinas virtuales con KVM y libvirt en mi desktop: Kali Linux como estación de ataque y Metasploitable 2 como primer blanco. Los blancos viven en una red aislada, sin salida a internet ni a la red de mi casa, y Metasploitable vuelve a un snapshot limpio después de cada práctica. Ya hay una tercera VM preparada para las aplicaciones web vulnerables (DVWA, Juice Shop y WebGoat), que es lo siguiente que instalo.",
+      "Antes de instalar revisé los choques con lo que ya corría en el equipo: el firewall bloqueaba la red de las VMs, y Docker se salta ufw cuando publica puertos, así que las aplicaciones vulnerables van en su propia VM y no en contenedores del desktop.",
+      "El reconocimiento lo vengo practicando desde el taller de hacking ético: OSINT con Google dorks, Shodan, theHarvester, Maltego y Recon-ng, y escaneo con Nmap. Lo que sigue es explotar los blancos y publicar cada sesión como writeup en este blog."
+    ]
+  },
+  {
+    "slug": "homelab-linux",
+    "type": "proyecto",
+    "category": "Homelab",
+    "featured": false,
+    "title": "Homelab Linux",
+    "description": "Notebook con Ubuntu Server en mi casa: Docker, Pi-hole como DNS de todos mis equipos, respaldos con restic y acceso remoto por Tailscale.",
+    "date": "2026-07-02",
+    "readingTime": "3 min",
+    "cover": null,
+    "tags": [],
+    "project": {
+      "state": "activo",
+      "since": "2024 →",
+      "stack": "Ubuntu Server · Docker · Pi-hole · restic · Tailscale",
+      "kind": "Personal"
+    },
+    "body": [
+      "Un notebook con Ubuntu Server en la red de mi casa, con Docker: Pi-hole como DNS (también de mis equipos fuera de la casa, por Tailscale), Nextcloud, Jellyfin y Nginx Proxy Manager. Los datos de los contenedores se respaldan con restic hacia un disco de mi desktop.",
+      "La IA local vive en el desktop, que es el que tiene la GPU: llama.cpp y Open WebUI, al alcance de todos mis equipos por Tailscale.",
+      "Existe para probar en casa lo que después toco en el trabajo: cambios de DNS, respaldos y actualizaciones. Si algo se rompe acá, el único afectado soy yo."
+    ]
+  },
+  {
+    "slug": "utilidades-woocommerce",
+    "type": "proyecto",
+    "category": "Dev",
+    "featured": false,
+    "title": "Utilidades WooCommerce",
+    "description": "Scripts internos para migrar órdenes, importar catálogos y reparar metadatos entre ambientes.",
+    "date": "2025-11-10",
+    "readingTime": "3 min",
+    "cover": null,
+    "tags": [],
+    "project": {
+      "state": "activo",
+      "since": "2013 →",
+      "stack": "PHP · SQL · WP-CLI",
+      "kind": "Trabajo"
+    },
+    "body": [
+      "Scripts internos para tareas repetitivas de WooCommerce: migrar órdenes entre ambientes, importar catálogos y reparar metadatos.",
+      "Nacieron de problemas reales en producción y se fueron ordenando hasta quedar como una caja de herramientas reutilizable."
+    ]
+  }
+]

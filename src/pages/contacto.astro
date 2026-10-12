@@ -1,0 +1,100 @@
+---
+import Base from '../layouts/Base.astro';
+import '../styles/prosa.css';
+import site from '../data/site.json';
+import formulario from '../data/formulario.json';
+
+// La clave de Turnstile se puede pisar al compilar (PUBLIC_TURNSTILE_SITEKEY) para probar con las claves de prueba.
+const sitekey = import.meta.env.PUBLIC_TURNSTILE_SITEKEY || formulario.turnstileSitekey;
+
+const title = "Contacto — Wladimir Aqueveque H. | wlaque.cl";
+const description = "Escríbeme por proyectos web en Webflow o Shopify, trabajo o consultas de infraestructura y seguridad.";
+---
+
+<Base active="contacto" title={title} description={description} canonical="https://wlaque.cl/contacto/">
+  <script slot="head" is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <main id="contenido">
+    <header class="phead">
+      <nav aria-label="Ruta" class="crumbs"><a href="/">Inicio</a><span aria-hidden="true">›</span><span aria-current="page">Contacto</span></nav>
+      <h1 class="cursor">Contacto</h1>
+      <p class="lede">Proyectos web en Webflow o Shopify, trabajo o consultas de infraestructura y seguridad.</p>
+    </header>
+    <div class="contact">
+      <div>
+        <form class="win wide" id="form" method="post" action="/api/contacto" novalidate aria-labelledby="win-t">
+          <div class="win-bar"><span id="win-t">Nuevo mensaje — wlaque.cl</span><span class="x" aria-hidden="true">×</span></div>
+          <div class="win-body">
+            <label class="fld">Nombre<input name="nombre" autocomplete="name" maxlength="100" required/></label>
+            <label class="fld">Email<input name="email" type="email" autocomplete="email" inputmode="email" maxlength="200" required/></label>
+            <label class="fld">Mensaje<textarea name="mensaje" maxlength="5000" required></textarea></label>
+            <div class="trampa" aria-hidden="true"><label>Sitio web<input name="web" tabindex="-1" autocomplete="off"/></label></div>
+            <div class="cf-turnstile" data-sitekey={sitekey} data-theme="dark" data-size="flexible" data-language="es"></div>
+          </div>
+          <div class="win-foot"><span class="win-status" id="status" role="status">El mensaje me llega directo.</span><button class="btn3d" type="reset">Limpiar</button><button class="btn3d pri" type="submit" id="enviar">Enviar</button></div>
+        </form>
+      </div>
+      <div class="c-side" aria-label="Otras formas de contacto">
+        <a class="ccard li" id="li" rel="me" href={site.profile.linkedin}><span class="k">LinkedIn</span><span class="v">/in/wladimir-aqueveque</span><span class="go">Ver perfil →</span></a>
+        <div class="ccard"><span class="k">Hora local</span><span class="v" id="clock">Santiago</span><span class="s" id="resp">Respondo en {site.contact.response}.</span></div>
+      </div>
+    </div>
+  </main>
+  <script type="application/json" id="contacto-data" set:html={JSON.stringify({ timezone: site.contact.timezone, hours: site.contact.hours })} />
+  <script>
+    const P = JSON.parse(document.getElementById('contacto-data').textContent);
+    const C = { timezone: P.timezone, hours: P.hours };
+    const form = document.getElementById('form'), status = document.getElementById('status');
+    
+    const clock = document.getElementById('clock');
+    function tick(){
+      const now = new Date(), t = now.toLocaleTimeString("es-CL", {timeZone:C.timezone, hour:"2-digit", minute:"2-digit", hourCycle:"h23"});
+      const h = +now.toLocaleString("en-US", {timeZone:C.timezone, hour:"numeric", hour12:false}), on = h >= C.hours[0] && h < C.hours[1];
+      clock.innerHTML = `<span class="dot${on ? "" : " off"}" aria-hidden="true"></span>Santiago ${t} · ${on ? "en horario" : "fuera de horario"}`;
+    }
+    tick(); setInterval(tick, 20000);
+    
+    // Envío al Worker (/api/contacto). Sin JS el formulario igual funciona: POST normal y vuelve con ?enviado=1 o ?error=…
+    const INICIO = "El mensaje me llega directo.";
+    const MENSAJES = {
+      ok: "Mensaje enviado. Te respondo en " + document.getElementById('resp').textContent.replace(/^Respondo en |\.$/g, "") + ".",
+      campos: "Completa los tres campos.", email: "Revisa el email.", largo: "El mensaje es demasiado largo.",
+      captcha: "No se pudo verificar que no eres un bot. Inténtalo de nuevo.",
+      limite: "Demasiados envíos seguidos. Espera un minuto.",
+      "no-configurado": "El formulario todavía no está activo. Escríbeme por LinkedIn.",
+      envio: "No se pudo enviar. Inténtalo más tarde o escríbeme por LinkedIn.",
+      red: "No hay conexión. Inténtalo de nuevo.",
+    };
+    const enviar = document.getElementById('enviar');
+    const estado = (cls, txt) => { status.className = "win-status" + (cls ? " " + cls : ""); status.textContent = txt; };
+    const resetCaptcha = () => window.turnstile && window.turnstile.reset();
+
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+      let bad = null;
+      form.querySelectorAll(".fld input,.fld textarea").forEach(f => { const ok = f.checkValidity(); f.setAttribute("aria-invalid", !ok); if (!ok && !bad) bad = f; });
+      if (bad){ estado("bad", bad.type==="email" && bad.value ? MENSAJES.email : MENSAJES.campos); bad.focus(); return; }
+      if (!new FormData(form).get("cf-turnstile-response")) { estado("bad", "Espera la verificación anti-bots, aparece sobre los botones."); return; }
+      enviar.disabled = true; estado("", "Enviando…");
+      let codigo = "red";
+      try {
+        const r = await fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
+        codigo = (await r.json()).codigo || "envio";
+      } catch {}
+      enviar.disabled = false;
+      if (codigo === "ok") { form.reset(); estado("ok", MENSAJES.ok); } else { estado("bad", MENSAJES[codigo] || MENSAJES.envio); }
+      resetCaptcha();
+    });
+
+    form.addEventListener("reset", () => { form.querySelectorAll("[aria-invalid]").forEach(f => f.removeAttribute("aria-invalid")); estado("", INICIO); });
+
+    const q = new URLSearchParams(location.search);
+    if (q.get("enviado") === "1") estado("ok", MENSAJES.ok);
+    else if (q.get("error")) estado("bad", MENSAJES[q.get("error")] || MENSAJES.envio);
+  </script>
+</Base>
+
+<style>
+  /* Campo trampa para bots: fuera de la vista y del orden de tabulación */
+  .trampa { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .cf-turnstile { min-height: 65px; }
+</style>

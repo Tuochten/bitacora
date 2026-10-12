@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — ciberseguridad, homelab e infraestructura | wlaque.cl</title>
+<meta name="description" content="Todas las entradas de wlaque.cl: ciberseguridad, homelab, WordPress, WooCommerce, Webflow, DNS y hosting.">
+<link rel="canonical" href="https://wlaque.cl/blog/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="wlaque.cl"><meta property="og:locale" content="es_CL"><meta property="og:title" content="Blog — ciberseguridad, homelab e infraestructura | wlaque.cl"><meta property="og:url" content="https://wlaque.cl/blog/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1b1e14"><link rel="icon" href="assets/avatar-face.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="bitacora.css">
+<link rel="stylesheet" href="interior.css">
+</head>
+<body>
+<div class="shell">
+<div id="site-top"></div>
+<main id="contenido">
+<header class="phead">
+<nav class="crumbs" aria-label="Ruta"><a href="index.html">Inicio</a><span aria-hidden="true">›</span><span aria-current="page" id="crumb-last">Blog</span></nav>
+<h1 class="cursor" id="h1">Blog</h1>
+<p class="lede">Notas de trabajo y proyectos: infraestructura, e-commerce y lo que voy aprendiendo en ciberseguridad.</p>
+</header>
+<div class="grid">
+<div class="col">
+<section aria-labelledby="seclabel">
+<nav class="types" id="types" aria-label="Tipo de contenido"></nav>
+<div class="sec"><h2 id="seclabel">Todas las entradas</h2><span class="r"></span><span class="c" id="count"></span></div>
+<div class="log" id="log"></div>
+<div id="pages"></div>
+</section>
+</div>
+<aside aria-label="Filtros">
+<h2 class="side-h">Filtrar por tema</h2><nav class="filters" id="filters" aria-label="Temas"></nav>
+<h2 class="side-h">Suscribirse</h2><ul><li class="pri"><a href="/rss.xml">RSS del blog</a></li></ul>
+<div class="guard" id="guard"></div>
+</aside>
+</div>
+</main>
+<div id="site-foot"></div>
+</div>
+<script src="js/ongoro.js"></script>
+<script src="js/site.js"></script>
+<script>
+Site.load().then(D => {
+Site.mount("blog");
+const PER = D.settings.postsPerPage;
+const tema = D.tags.includes(Site.param("tema")) ? Site.param("tema") : "Todos";
+const tipo = ["entrada","proyecto"].includes(Site.param("tipo")) ? Site.param("tipo") : "todo";
+const inTipo = p => tipo==="todo" || p.type===tipo;
+const all = D.postsByDate.filter(p => inTipo(p) && (tema==="Todos" || p.category===tema));
+const n = Math.max(1, Math.ceil(all.length / PER));
+const cur = Math.min(Math.max(1, parseInt(Site.param("pagina")) || 1), n);
+// En producción: /blog/, /blog/2/, /blog/proyectos/, /blog/entradas/, /blog/tema/homelab/, /blog/proyectos/tema/homelab/2/
+const href = (ti, t, i) => { const q = new URLSearchParams(); if (ti!=="todo") q.set("tipo", ti); if (t!=="Todos") q.set("tema", t); if (i>1) q.set("pagina", i); const s = q.toString(); return "blog.html" + (s ? "?" + s : ""); };
+document.getElementById("types").innerHTML = D.types.map(t => {
+  const c = D.posts.filter(p => (t.id==="todo" || p.type===t.id) && (tema==="Todos" || p.category===tema)).length;
+  return `<a href="${href(t.id, tema, 1)}"${t.id===tipo ? ' aria-current="page"' : ""}>${t.label}<span class="n">${c}</span></a>`;
+}).join("");
+document.getElementById("filters").innerHTML = D.tags.map(t => {
+  const c = D.posts.filter(p => inTipo(p) && (t==="Todos" || p.category===t)).length;
+  return `<a href="${href(tipo, t, 1)}"${t===tema ? ' aria-current="page"' : ""}><span>${t==="Todos" ? "Todos" : "› " + t}</span><span class="n">${c}</span></a>`;
+}).join("");
+const tipoL = {todo:"Todo", entrada:"Entradas", proyecto:"Proyectos"}[tipo];
+document.getElementById("seclabel").textContent = (tipo==="todo" ? "Todo" : tipoL) + (tema==="Todos" ? "" : " · " + tema);
+document.getElementById("count").textContent = `${all.length} resultados · página ${cur} de ${n}`;
+const trail = [tipo!=="todo" ? [tipoL, href(tipo,"Todos",1)] : null, tema!=="Todos" ? [tema] : null].filter(Boolean);
+if (trail.length){ document.getElementById("crumb-last").outerHTML = '<a href="blog.html">Blog</a>' + trail.map((c,k) => '<span aria-hidden="true">›</span>' + (k<trail.length-1 ? '<a href="' + c[1] + '">' + c[0] + '</a>' : '<span aria-current="page">' + c[0] + '</span>')).join(""); }
+document.title = ["Blog", tipo!=="todo" ? tipoL : "", tema!=="Todos" ? tema : ""].filter(Boolean).join(": ") + (cur>1 ? " — página " + cur : "") + " | wlaque.cl";
+const items = all.slice((cur-1)*PER, cur*PER);
+document.getElementById("log").innerHTML = items.length ? items.map(Site.row).join("") : `<div class="empty">${ongoroSVG(56)}<p>Nada por acá todavía. Prueba otro filtro.</p></div>`;
+document.getElementById("pages").outerHTML = Site.pages(n, cur, i => href(tipo, tema, i));
+document.getElementById("guard").innerHTML = ongoroSVG(48) + '<div class="cap">guardián · en vigilia</div>';
+}).catch(Site.fail);
+</script>
+</body>
+</html>

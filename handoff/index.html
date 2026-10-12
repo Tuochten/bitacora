@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wladimir Aqueveque H. — Profesional TI, ciberseguridad y desarrollo web | wlaque.cl</title>
+<meta name="description" content="Wladimir Aqueveque H.: más de 13 años en soporte técnico, infraestructura y plataformas, y más de 150 proyectos web como freelance en Webflow, Shopify y WordPress. Notas sobre ciberseguridad y homelab.">
+<link rel="canonical" href="https://wlaque.cl/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="wlaque.cl"><meta property="og:locale" content="es_CL">
+<meta property="og:title" content="Wladimir Aqueveque H. — wlaque.cl"><meta property="og:description" content="Profesional TI · Ciberseguridad · WebDev · Estudiante de Ingeniería."><meta property="og:url" content="https://wlaque.cl/"><meta property="og:image" content="https://wlaque.cl/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1b1e14">
+<link rel="icon" href="assets/avatar-face.png">
+<link rel="alternate" type="application/rss+xml" title="wlaque.cl" href="/rss.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Wladimir Aqueveque H.","url":"https://wlaque.cl/","jobTitle":"Profesional TI","knowsAbout":["Ciberseguridad","Infraestructura TI","DNS","Hosting","WordPress","Webflow","Shopify"]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="bitacora.css">
+<link rel="stylesheet" href="home.css">
+<link rel="stylesheet" href="interior.css">
+</head>
+<body>
+<div class="shell">
+<div id="site-top"></div>
+<main id="contenido">
+<section class="head" aria-labelledby="nombre">
+<div class="head-txt">
+<h1 id="nombre" class="cursor">Wladimir <em>Aqueveque H.</em></h1>
+<p class="role">Profesional TI · Ciberseguridad · WebDev · Estudiante de Ingeniería.</p>
+<p id="bio"></p>
+</div>
+<a class="free" href="desarrollo-web.html" aria-label="Desarrollo web freelance">
+<span class="free-k"><i aria-hidden="true"></i>Freelance web</span>
+<span class="free-n">+150</span>
+<span class="free-l">proyectos web</span>
+<span class="free-s"><b>Webflow</b> sitios informativos</span>
+<span class="free-s"><b>Shopify</b> e-commerce</span>
+<span class="free-x">y rescates de WordPress</span>
+<span class="free-go">Contáctame →</span>
+</a>
+<div class="head-art" id="headart" aria-hidden="true"><div class="scan"></div></div>
+</section>
+<section class="status" id="status" aria-label="Ahora mismo"></section>
+<div class="grid">
+<div class="col">
+<div id="pin"></div>
+<section aria-labelledby="seclabel">
+<div class="sec"><h2 id="seclabel">Entradas recientes</h2><span class="r"></span><a href="blog.html">Ver todas →</a></div>
+<div class="log" id="log"></div>
+</section>
+<section aria-labelledby="h-proy" class="sec-gap">
+<div class="sec"><h2 id="h-proy">Proyectos</h2><span class="r"></span><a href="blog.html?tipo=proyecto">Ver todos →</a></div>
+<div class="units" id="units"></div>
+</section>
+</div>
+<aside aria-label="Complementario">
+<h2 class="side-h">Filtrar por tema</h2><div class="filters" id="filters" role="group" aria-label="Temas"></div>
+<div id="skills"></div>
+<div class="guard" id="guard"></div>
+</aside>
+</div>
+</main>
+<div id="site-foot"></div>
+</div>
+<script src="js/mascot-svg.js"></script>
+<script src="js/ongoro.js"></script>
+<script src="js/site.js"></script>
+<script>
+Site.load().then(D => {
+  Site.mount("inicio");
+  document.getElementById("bio").textContent = D.profile.bio;
+  document.getElementById("headart").insertAdjacentHTML("afterbegin", mascotSVG({cls:"mas"}));
+  document.getElementById("guard").innerHTML = ongoroSVG(52) + '<div class="cap">guardián · en vigilia</div>';
+  document.getElementById("units").innerHTML = D.postsByDate.filter(Site.isProj).slice(0,4).map(Site.unit).join("");
+  document.getElementById("status").innerHTML = D.now.map(a => `<div class="${a.tone}"><span class="k">${a.label}</span><span class="v">${a.value}</span><span class="n">${a.note}</span></div>`).join("");
+  document.getElementById("skills").innerHTML = Site.skills();
+  Site.postFilter({ filters:document.getElementById("filters"), list:document.getElementById("log"), pin:document.getElementById("pin"),
+    label:document.getElementById("seclabel"), defaultLabel:"Entradas recientes", skipFeatured:true, limit:D.settings.homeRecent, type:"entrada" });
+}).catch(Site.fail);
+</script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<main id="contenido">
+
+<article>
+
+<header class="phead">
+
+<nav aria-label="Ruta" class="crumbs"><a href="/">Inicio</a><span aria-hidden="true">›</span><a href="/blog/">Blog</a><span aria-hidden="true">›</span><span aria-current="page" id="crumb-last">Migrar órdenes WooCommerce</span></nav>
+
+<div class="cat Dev" id="cats">Dev · WooCommerce · SQL</div>
+
+<h1 id="h1">Migrar órdenes WooCommerce entre ambientes sin morir en el intento</h1>
+
+<div class="meta"><span>Wladimir Aqueveque H.</span><time datetime="2025-04-20" id="date">20 abr 2025</time><span id="read">8 min de lectura</span></div>
+</header>
+
+<div aria-label="Portada: Migrar órdenes WooCommerce entre ambientes sin morir en el intento" class="cover" role="img"></div>
+
+<div class="grid">
+
+<div class="col">
+
+<div class="prose" id="prose">
+
+<p class="lead">Migrar pedidos entre producción y QA parece simple hasta que lo intentas. WooCommerce guarda una orden en al menos cuatro tablas distintas y romper una FK en producción es la clase de error que termina con tu domingo. Esta es la receta que terminamos usando: SQL directo, <span class="ic">INSERT IGNORE</span> y cero drama.</p>
+
+<h2 id="el-contexto"><span class="n">01</span>El contexto</h2>
+
+<p>Necesitábamos replicar pedidos reales en QA para probar una migración importante. La opción "exportar todo desde el panel de WordPress" no existe: las herramientas oficiales no incluyen pedidos completos con sus metas e ítems. Y los plugins comerciales que sí lo hacen cuestan más de lo que queríamos justificar para un script que íbamos a usar tres veces.</p>
+
+<div class="note warn" role="note"><span class="k">Antes de empezar</span>Haz un backup completo de la base de datos de destino. Un <span class="ic">mysqldump</span> de cinco minutos te puede salvar horas de rollback. No es opcional.</div>
+
+<h2 id="las-tablas-involucradas"><span class="n">02</span>Las tablas involucradas</h2>
+
+<p>WooCommerce distribuye una orden en al menos cuatro tablas principales. Hay que exportarlas en el orden correcto para respetar las foreign keys, o el destino rechaza todo en silencio:</p>
+
+<ul>
+
+<li><span class="ic">wp_posts</span>: la orden como tipo <span class="ic">shop_order</span></li>
+
+<li><span class="ic">wp_postmeta</span>: datos del cliente, totales, dirección</li>
+
+<li><span class="ic">wp_woocommerce_order_items</span>: productos del pedido</li>
+
+<li><span class="ic">wp_woocommerce_order_itemmeta</span>: variaciones, atributos</li>
+</ul>
+
+<div class="code">
+<div class="code-h"><span>SQL · tablas a exportar</span>
+<button data-copy="" type="button">Copiar</button></div>
+<pre><code><span class="c">-- 1. Orden principal</span>
+SELECT * FROM wp_posts
+  WHERE post_type = 'shop_order'
+  AND post_date &gt; '2025-04-13';
+
+<span class="c">-- 2. Meta de la orden</span>
+SELECT * FROM wp_postmeta
+  WHERE post_id IN (...ids...);
+
+<span class="c">-- 3. Ítems de la orden</span>
+SELECT * FROM wp_woocommerce_order_items
+  WHERE order_id IN (...ids...);</code></pre></div>
+
+<h3 id="generar-el-listado-de-ids">Generar el listado de IDs</h3>
+
+<p>El truco está en armar el <span class="ic">IN (...ids...)</span> a partir de la primera consulta. phpMyAdmin tiene un export rápido que ya lo formatea como lista separada por comas: copia, pega, sigue.</p>
+
+<h2 id="el-approach-insert-ignore"><span class="n">03</span>El approach: INSERT IGNORE</h2>
+
+<p>Para evitar errores por IDs duplicados en QA usamos <span class="ic">INSERT IGNORE</span> en lugar del <span class="ic">INSERT</span> estándar. Si el registro ya existe lo salta, sin reventar el resto del script. Para una migración idempotente esto es oro.</p>
+
+<div class="note" role="note"><span class="k">Tip</span>En phpMyAdmin: Export → Custom → activa "INSERT IGNORE" en las opciones de generación. Te ahorras editar el archivo a mano con <span class="ic">sed -i</span> después.</div>
+
+<h2 id="resultado-final"><span class="n">04</span>Resultado final</h2>
+
+<p>Con este método migramos 340 órdenes en menos de 10 minutos, sin conflictos de FK y con todos los metadatos intactos. El ambiente de QA quedó listo para probar el flujo completo.</p>
+</div>
+
+<nav aria-label="Entradas" class="pager" id="pager"><a href="/blog/pihole-nextcloud-vpn-docker/" rel="prev"><span>← Anterior</span>Pi-hole + Nextcloud + VPN en Docker: mi stack personal</a><a href="/blog/utilidades-woocommerce/" rel="next"><span>Siguiente →</span>Utilidades WooCommerce</a></nav>
+
+<section aria-labelledby="h-rel" class="sec-gap">
+
+<div class="sec">
+<h2 id="h-rel">Relacionadas</h2><span class="r"></span></div>
+
+<div class="log" id="rel">
+<article class="row">
+<div aria-label="Miniatura: Utilidades WooCommerce" class="th" role="img"></div>
+
+<div>
+<div class="meta"><time class="ts" datetime="2025-11-10">2025-11-10</time><span class="kind"><i aria-hidden="true"></i>Proyecto · activo</span><span class="cat Dev">Dev</span><span class="rd">3 min</span></div>
+
+<h3><a class="ti" href="/blog/utilidades-woocommerce/">Utilidades WooCommerce</a></h3>
+<p class="de">Scripts internos para migrar órdenes, importar catálogos y reparar metadatos entre ambientes.</p></div></article>
+<article class="row">
+<div aria-label="Miniatura: Importar productos WooCommerce con WP All Import PRO" class="th" role="img"></div>
+
+<div>
+<div class="meta"><time class="ts" datetime="2025-01-08">2025-01-08</time><span class="cat Dev">Dev</span><span class="rd">11 min</span></div>
+
+<h3><a class="ti" href="/blog/importar-productos-woocommerce-wp-all-import/">Importar productos WooCommerce con WP All Import PRO</a></h3>
+<p class="de">Mapeo de campos, imágenes destacadas y galerías. La guía que hubiera querido encontrar.</p></div></article></div>
+</section>
+</div>
+
+<aside aria-label="En esta entrada">
+
+<div class="sticky">
+
+<div class="side-toc" id="side-toc">
+<h2 class="side-h">En esta entrada</h2>
+<ol class="toc" id="toc">
+<li><a class="on" href="#el-contexto"><span class="n">01</span>El contexto</a></li>
+<li><a href="#las-tablas-involucradas"><span class="n">02</span>Las tablas involucradas</a></li>
+<li><a href="#el-approach-insert-ignore"><span class="n">03</span>El approach: INSERT IGNORE</a></li>
+<li><a href="#resultado-final"><span class="n">04</span>Resultado final</a></li></ol></div>
+
+<div hidden="" id="projbox">
+<h2 class="side-h">Proyecto</h2>
+<dl class="facts" id="pfacts"></dl></div>
+
+<h2 class="side-h">Detalles</h2>
+
+<dl class="facts" id="facts">
+<dt>Publicado</dt>
+<dd>20 abr 2025</dd>
+<dt>Lectura</dt>
+<dd>8 min</dd>
+<dt>Tema</dt>
+<dd><a href="/blog/tema/dev/">Dev</a></dd></dl>
+
+<h2 class="side-h">Compartir</h2>
+
+<div class="share"><a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fwlaque.cl%2Fblog%2Fmigrar-ordenes-woocommerce%2F" id="sh-li">LinkedIn</a><a href="https://x.com/intent/post?url=https%3A%2F%2Fwlaque.cl%2Fblog%2Fmigrar-ordenes-woocommerce%2F&amp;text=Migrar%20%C3%B3rdenes%20WooCommerce%20entre%20ambientes%20sin%20morir%20en%20el%20intento" id="sh-x">X</a>
+<button id="copylink" type="button">Copiar enlace</button></div>
+</div>
+</aside>
+</div>
+</article>
+</main>

@@ -1,0 +1,90 @@
+---
+import Base from '../layouts/Base.astro';
+import '../styles/prosa.css';
+import site from '../data/site.json';
+
+const title = "Sobre mí — Wladimir Aqueveque H. | wlaque.cl";
+const description = "Profesional TI con más de 13 años en soporte, desarrollo web y plataformas. Estudiante de Ingeniería en Ciberseguridad y Auditoría (USS), preparando CompTIA Security+.";
+---
+
+<Base active="sobre" title={title} description={description} canonical="https://wlaque.cl/sobre-mi/">
+  <main id="contenido">
+    <header class="phead">
+      <nav aria-label="Ruta" class="crumbs"><a href="/">Inicio</a><span aria-hidden="true">›</span><span aria-current="page">Sobre mí</span></nav>
+      <div class="intro">
+        <img src="/assets/avatar-face.png" alt="Wladimir Aqueveque H." width="132" height="132"/>
+        <div>
+          <h1 class="cursor">Wladimir Aqueveque H.</h1>
+          <p class="lede">{site.profile.role}</p>
+        </div>
+      </div>
+    </header>
+    <div class="about">
+      <div class="prose" id="about">
+        <h2 id="sobre">Sobre mí</h2>
+        {site.profile.about.map((t, i) => <p class={i === 0 ? 'lead' : undefined}>{t}</p>)}
+      </div>
+      <aside aria-label="Resumen" class="about-side">
+        <h2 class="side-h">Ahora mismo</h2>
+        <div class="now stack" id="now">
+          {site.now.map((a) => <div class={a.tone}><span class="k">{a.label}</span><span class="v">{a.value}</span><span class="n">{a.note}</span></div>)}
+        </div>
+        <h2 class="side-h">Idiomas</h2>
+        <ul id="langs">
+          {site.languages.map((l) => <li class="pri">{l.name} — {l.level}{l.note ? ` (${l.note})` : ''}</li>)}
+        </ul>
+        <div class="share" id="links">
+          <a href={site.profile.linkedin} rel="me">LinkedIn</a><a href="/contacto/">Contacto</a>
+        </div>
+      </aside>
+    </div>
+    <section class="blk" aria-labelledby="h-curso">
+      <div class="sec"><h2 id="h-curso">En curso</h2><span class="r"></span></div>
+      <div class="ip" id="ip">
+        {site.inProgress.map((x) => <article><div class="k">{x.kind}<span>{x.when}</span></div><h3>{x.title}</h3><p class="o">{x.org}</p><p class="d">{x.detail}</p></article>)}
+      </div>
+    </section>
+    <section class="blk" aria-labelledby="h-form">
+      <div class="cols2">
+        <div>
+          <div class="sec"><h2 id="h-form">Formación</h2><span class="r"></span></div>
+          <ol class="tl" id="edu">
+            {site.education.map((x) => <li class={/curso/i.test(x.when + x.note) ? 'cur' : undefined}><span class="w">{x.when}</span><b>{x.title}</b><span class="o">{x.org}</span>{x.note && <span class="x">{x.note}</span>}</li>)}
+          </ol>
+        </div>
+        <div>
+          <div class="sec"><h2 id="h-cap">Capacitaciones</h2><span class="r"></span></div>
+          <ol class="tl" id="train">
+            {site.training.map((x) => <li class={/curso/i.test(x.when + x.note) ? 'cur' : undefined}><span class="w">{x.when}</span><b>{x.title}</b><span class="o">{x.org}</span>{x.note && <span class="x">{x.note}</span>}</li>)}
+          </ol>
+        </div>
+      </div>
+    </section>
+    <section class="blk" aria-labelledby="h-hab">
+      <div class="sec"><h2 id="h-hab">Habilidades y herramientas</h2><span class="r"></span></div>
+      <div class="tools" id="tools">
+        {site.tools.map((g) => <div><h3 class="side-h">{g.group}</h3><div class="chips">{g.items.map((i) => <span class="chip">{i}</span>)}</div></div>)}
+      </div>
+      <div class="extra">
+        <div>
+          <h3 class="side-h">Atributos</h3>
+          <div class="chips" id="attrs">
+            {site.attributes.map((a) => <span class="chip">{a}</span>)}
+          </div>
+        </div>
+        <div>
+          <h3 class="side-h">Homelab</h3>
+          <div class="chips" id="lab">
+            <span class="chip">Docker</span><span class="chip">Pi-hole</span><span class="chip">restic</span><span class="chip">Tailscale</span><span class="chip">llama.cpp</span><span class="chip">Open WebUI</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section aria-label="Contacto" class="blk">
+      <div class="cta">
+        <div><b>¿Conversamos?</b><p id="cta-p">Proyectos web, trabajo o consultas de infraestructura y seguridad. Respondo en {site.contact.response}.</p></div>
+        <a class="btn" href="/contacto/">Ir a contacto →</a>
+      </div>
+    </section>
+  </main>
+</Base>

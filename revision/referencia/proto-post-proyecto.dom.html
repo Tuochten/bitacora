@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Homelab Linux | wlaque.cl</title>
+<meta content="Nodo Linux en casa con Docker, Pi-hole, restic, Tailscale e IA local. Mi campo de pruebas para todo lo que después va a producción." name="description"/>
+<link href="https://wlaque.cl/blog/migrar-ordenes-woocommerce/" rel="canonical"/>
+<meta content="article" property="og:type"/><meta content="Migrar órdenes WooCommerce entre ambientes sin morir en el intento" property="og:title"/><meta content="Cómo migrar pedidos de producción a QA usando SQL directo y phpMyAdmin." property="og:description"/><meta content="https://wlaque.cl/blog/migrar-ordenes-woocommerce/" property="og:url"/><meta content="2025-04-20" property="article:published_time"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="#1b1e14" name="theme-color"/><link href="assets/avatar-face.png" rel="icon"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Migrar órdenes WooCommerce entre ambientes sin morir en el intento","datePublished":"2025-04-20","author":{"@type":"Person","name":"Wladimir Aqueveque H.","url":"https://wlaque.cl/"},"inLanguage":"es-CL"}</script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="bitacora.css" rel="stylesheet"/>
+<link href="prosa.css" rel="stylesheet"/>
+<link href="interior.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="shell">
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="top"><a aria-label="wlaque.cl, inicio" class="brand" href="/"><img alt="" class="avatar" height="44" src="/assets/avatar-face.png" width="44"/><span><b>wlaque.cl</b><span class="sub">~/web-personal</span></span></a>
+<button aria-controls="menu" aria-expanded="false" class="menu-btn" type="button">Menú</button>
+<nav aria-label="Principal" class="menu" id="menu"><a data-nav="inicio" href="/">Inicio</a><a aria-current="page" class="on" data-nav="blog" href="/blog/">Blog</a><a data-nav="web" href="/desarrollo-web/">Desarrollo web</a><a data-nav="sobre" href="/sobre-mi/">Sobre mí</a><a data-nav="contacto" href="/contacto/">Contacto</a></nav>
+<button aria-label="Buscar en el sitio" class="hslot search" data-open-search="" type="button"><svg aria-hidden="true" height="14" viewBox="0 0 16 16" width="14"><circle cx="7" cy="7" fill="none" r="5" stroke="currentColor" stroke-width="1.6"></circle><path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.6"></path></svg><span class="ph">Buscar…</span><kbd>Ctrl K</kbd></button></header>
+<div aria-hidden="true" class="readbar"><i id="readfill" style="width: 0%;"></i></div>
+<main id="contenido">
+<article>
+<header class="phead">
+<nav aria-label="Ruta" class="crumbs"><a href="/">Inicio</a><span aria-hidden="true">›</span><a href="/blog/">Blog</a><span aria-hidden="true">›</span><a href="/blog/proyectos/">Proyectos</a><span aria-hidden="true">›</span><span aria-current="page" id="crumb-last">Homelab Linux</span></nav>
+<div class="cat Homelab" id="cats">Proyecto · Homelab</div>
+<h1 id="h1">Homelab Linux</h1>
+<div class="meta"><span>Wladimir Aqueveque H.</span><time datetime="2026-07-02" id="date">2 jul 2026</time><span id="read">3 min de lectura</span></div>
+</header>
+<div aria-hidden="true" class="cover-term"><span class="cat Homelab">Homelab</span><span class="p">~/proyectos/</span><span class="t cursor">Homelab Linux</span></div>
+<div class="grid">
+<div class="col">
+<div class="prose" id="prose"><p class="lead">Nodo Linux en casa con Docker, Pi-hole, restic, Tailscale e IA local. Mi campo de pruebas para todo lo que después va a producción.</p><h2 id="resumen"><span class="n">01</span>Resumen</h2><p>Un solo nodo Linux en casa con Docker: DNS con Pi-hole, respaldos con restic, acceso remoto por Tailscale e IA local autoalojada con llama.cpp y Open WebUI.</p><p>Existe para probar en casa lo que después toco en el trabajo: cambios de DNS, respaldos y actualizaciones. Si algo se rompe acá, el único afectado soy yo.</p></div>
+<nav aria-label="Entradas" class="pager" id="pager"><a href="/blog/utilidades-woocommerce/" rel="prev"><span>← Anterior</span>Utilidades WooCommerce</a><a href="/blog/laboratorio-pentesting/" rel="next"><span>Siguiente →</span>Laboratorio de pentesting</a></nav>
+<section aria-labelledby="h-rel" class="sec-gap">
+<div class="sec"><h2 id="h-rel">Relacionadas</h2><span class="r"></span></div>
+<div class="log" id="rel"><article class="row"><div aria-label="Miniatura: Pi-hole + Nextcloud + VPN en Docker: mi stack personal" class="th" role="img"></div>
+<div><div class="meta"><time class="ts" datetime="2025-03-12">2025-03-12</time><span class="cat Homelab">Homelab</span><span class="rd">8 min</span></div>
+<h3><a class="ti" href="/blog/pihole-nextcloud-vpn-docker/">Pi-hole + Nextcloud + VPN en Docker: mi stack personal</a></h3><p class="de">Tres contenedores que reemplazan medio Google sin pagar suscripciones ni entregar tus datos.</p></div></article><article class="row"><div aria-label="Miniatura: Proxmox en un mini PC usado: lo que aprendí la primera semana" class="th" role="img"></div>
+<div><div class="meta"><time class="ts" datetime="2024-11-22">2024-11-22</time><span class="cat Homelab">Homelab</span><span class="rd">9 min</span></div>
+<h3><a class="ti" href="/blog/proxmox-en-un-mini-pc/">Proxmox en un mini PC usado: lo que aprendí la primera semana</a></h3><p class="de">Hardware barato, almacenamiento mal planeado y la primera VM que no arrancó.</p></div></article></div>
+</section>
+</div>
+<aside aria-label="En esta entrada">
+<div class="sticky">
+<div class="side-toc" id="side-toc"><h2 class="side-h">En esta entrada</h2><ol class="toc" id="toc"><li><a class="on" href="#resumen"><span class="n">01</span>Resumen</a></li></ol></div>
+<div id="projbox"><h2 class="side-h">Proyecto</h2><dl class="facts" id="pfacts"><dt>Estado</dt><dd>activo</dd><dt>Desde</dt><dd>2023</dd><dt>Tipo</dt><dd>Personal</dd><dt>Stack</dt><dd>Docker · Pi-hole · restic · Tailscale</dd></dl></div>
+<h2 class="side-h">Detalles</h2>
+<dl class="facts" id="facts"><dt>Actualizado</dt><dd>2 jul 2026</dd><dt>Lectura</dt><dd>3 min</dd><dt>Tema</dt><dd><a href="/blog/tema/homelab/">Homelab</a></dd></dl>
+<h2 class="side-h">Compartir</h2>
+<div class="share"><a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fwlaque.cl%2Fblog%2Fhomelab-linux%2F" id="sh-li">LinkedIn</a><a href="https://x.com/intent/post?url=https%3A%2F%2Fwlaque.cl%2Fblog%2Fhomelab-linux%2F&amp;text=Homelab%20Linux" id="sh-x">X</a><button id="copylink" type="button">Copiar enlace</button></div>
+</div>
+</aside>
+</div>
+</article>
+</main>
+<!-- Cuerpo de ejemplo. En producción sale de content/blog/<slug>.md -->
+<template id="body-migrar-ordenes-woocommerce">
+<p class="lead">Migrar pedidos entre producción y QA parece simple hasta que lo intentas. WooCommerce guarda una orden en al menos cuatro tablas distintas y romper una FK en producción es la clase de error que termina con tu domingo. Esta es la receta que terminamos usando: SQL directo, <span class="ic">INSERT IGNORE</span> y cero drama.</p>
+<h2 id="contexto"><span class="n">01</span>El contexto</h2>
+<p>Necesitábamos replicar pedidos reales en QA para probar una migración importante. La opción "exportar todo desde el panel de WordPress" no existe: las herramientas oficiales no incluyen pedidos completos con sus metas e ítems. Y los plugins comerciales que sí lo hacen cuestan más de lo que queríamos justificar para un script que íbamos a usar tres veces.</p>
+<div class="note warn" role="note"><span class="k">Antes de empezar</span>Haz un backup completo de la base de datos de destino. Un <span class="ic">mysqldump</span> de cinco minutos te puede salvar horas de rollback. No es opcional.</div>
+<h2 id="tablas"><span class="n">02</span>Las tablas involucradas</h2>
+<p>WooCommerce distribuye una orden en al menos cuatro tablas principales. Hay que exportarlas en el orden correcto para respetar las foreign keys, o el destino rechaza todo en silencio:</p>
+<ul>
+<li><span class="ic">wp_posts</span>: la orden como tipo <span class="ic">shop_order</span></li>
+<li><span class="ic">wp_postmeta</span>: datos del cliente, totales, dirección</li>
+<li><span class="ic">wp_woocommerce_order_items</span>: productos del pedido</li>
+<li><span class="ic">wp_woocommerce_order_itemmeta</span>: variaciones, atributos</li>
+</ul>
+<div class="code"><div class="code-h"><span>SQL · tablas a exportar</span><button data-copy="" type="button">Copiar</button></div>
+<pre><code><span class="c">-- 1. Orden principal</span>
+SELECT * FROM wp_posts
+  WHERE post_type = 'shop_order'
+  AND post_date &gt; '2025-04-13';
+
+<span class="c">-- 2. Meta de la orden</span>
+SELECT * FROM wp_postmeta
+  WHERE post_id IN (...ids...);
+
+<span class="c">-- 3. Ítems de la orden</span>
+SELECT * FROM wp_woocommerce_order_items
+  WHERE order_id IN (...ids...);</code></pre></div>
+<h3>Generar el listado de IDs</h3>
+<p>El truco está en armar el <span class="ic">IN (...ids...)</span> a partir de la primera consulta. phpMyAdmin tiene un export rápido que ya lo formatea como lista separada por comas: copia, pega, sigue.</p>
+<h2 id="approach"><span class="n">03</span>El approach: INSERT IGNORE</h2>
+<p>Para evitar errores por IDs duplicados en QA usamos <span class="ic">INSERT IGNORE</span> en lugar del <span class="ic">INSERT</span> estándar. Si el registro ya existe lo salta, sin reventar el resto del script. Para una migración idempotente esto es oro.</p>
+<div class="note" role="note"><span class="k">Tip</span>En phpMyAdmin: Export → Custom → activa "INSERT IGNORE" en las opciones de generación. Te ahorras editar el archivo a mano con <span class="ic">sed -i</span> después.</div>
+<h2 id="resultado"><span class="n">04</span>Resultado final</h2>
+<p>Con este método migramos 340 órdenes en menos de 10 minutos, sin conflictos de FK y con todos los metadatos intactos. El ambiente de QA quedó listo para probar el flujo completo.</p>
+</template>
+<footer class="foot"><nav aria-label="Redes"><a href="#" rel="me">GitHub</a><a href="https://www.linkedin.com/in/wladimir-aqueveque" rel="me">LinkedIn</a><a href="/rss.xml">RSS</a></nav><div>© 2026 wlaque.cl — hecho con Astro</div></footer>
+</div>
+<script src="js/ongoro.js"></script>
+<script src="js/site.js"></script>
+<script>
+Site.load().then(D => {
+Site.mount("blog");
+const esc = Site.esc, L = D.postsByDate;
+const p = L.find(x => x.slug===Site.param("slug")) || D.posts.find(x => x.featured);
+const i = L.indexOf(p);
+document.title = Site.shortTitle(p, 60) + " | wlaque.cl";
+document.querySelector('meta[name="description"]').content = p.description;
+document.getElementById("crumb-last").textContent = Site.shortTitle(p);
+const P = Site.isProj(p) && p.project;
+if (P){
+  document.getElementById("crumb-last").insertAdjacentHTML("beforebegin", '<a href="blog.html?tipo=proyecto">Proyectos</a><span aria-hidden="true">›</span>');
+  document.getElementById("projbox").hidden = false;
+  document.getElementById("pfacts").innerHTML = `<dt>Estado</dt><dd>${P.state}</dd><dt>Desde</dt><dd>${P.since.replace(/\s*→/, "")}</dd><dt>Tipo</dt><dd>${P.kind}</dd><dt>Stack</dt><dd>${esc(P.stack)}</dd>`;
+}
+const cats = document.getElementById("cats"); cats.classList.add(p.category); cats.textContent = [P ? "Proyecto" : "", p.category, ...p.tags].filter(Boolean).join(" · ");
+document.getElementById("h1").textContent = p.title;
+const dt = document.getElementById("date"); dt.dateTime = p.date; dt.textContent = Site.fmtDate(p.date);
+document.getElementById("read").textContent = p.readingTime + " de lectura";
+// Portada: imagen si existe; si no, bloque de terminal con categoría y título corto.
+document.getElementById("cover").outerHTML = p.cover
+  ? `<div class="cover" role="img" aria-label="Portada: ${esc(p.title)}"></div>`
+  : `<div class="cover-term" aria-hidden="true"><span class="cat ${p.category}">${p.category}</span><span class="p">~/${P ? "proyectos" : "blog/" + p.category.toLowerCase()}/</span><span class="t cursor">${esc(Site.shortTitle(p))}</span></div>`;
+const tpl = document.getElementById("body-" + p.slug), prose = document.getElementById("prose");
+prose.innerHTML = tpl ? tpl.innerHTML
+  : p.body ? `<p class="lead">${esc(p.description)}</p><h2 id="resumen"><span class="n">01</span>Resumen</h2>` + p.body.map(t => "<p>" + esc(t) + "</p>").join("")
+  : `<p class="lead">${esc(p.description)}</p><div class="note" role="note"><span class="k">Prototipo</span>El cuerpo de esta entrada no está en el prototipo. En producción sale de su archivo Markdown.</div>`;
+// Paginador por fecha: Anterior = la inmediatamente más antigua, Siguiente = la más nueva.
+const older = L[i+1], newer = L[i-1];
+document.getElementById("pager").innerHTML =
+  (older ? `<a href="${Site.postHref(older)}" rel="prev"><span>← Anterior</span>${esc(older.title)}</a>` : '<span class="pager-x" aria-hidden="true"></span>') +
+  (newer ? `<a href="${Site.postHref(newer)}" rel="next"><span>Siguiente →</span>${esc(newer.title)}</a>` : '<span class="pager-x" aria-hidden="true"></span>');
+// Relacionadas: misma categoría por fecha; si faltan, se completa con las más recientes.
+const rel = L.filter(x => x!==p && x.category===p.category);
+L.forEach(x => { if (rel.length < 2 && x!==p && !rel.includes(x)) rel.push(x); });
+document.getElementById("rel").innerHTML = rel.slice(0,2).map(Site.row).join("");
+document.getElementById("facts").innerHTML = `<dt>${P ? "Actualizado" : "Publicado"}</dt><dd>${Site.fmtDate(p.date)}</dd><dt>Lectura</dt><dd>${p.readingTime}</dd><dt>Tema</dt><dd><a href="blog.html?tema=${p.category}">${p.category}</a></dd>`;
+const u = encodeURIComponent("https://wlaque.cl/blog/" + p.slug + "/");
+document.getElementById("sh-li").href = "https://www.linkedin.com/sharing/share-offsite/?url=" + u;
+document.getElementById("sh-x").href = "https://x.com/intent/post?url=" + u + "&text=" + encodeURIComponent(p.title);
+const heads = [...prose.querySelectorAll("h2")], toc = document.getElementById("toc");
+if (!heads.length) document.getElementById("side-toc").hidden = true;
+toc.innerHTML = heads.map(h => `<li><a href="#${h.id}"><span class="n">${h.querySelector(".n").textContent}</span>${h.childNodes[1].textContent}</a></li>`).join("");
+const links = [...toc.querySelectorAll("a")], fill = document.getElementById("readfill");
+function onScroll(){
+  const max = document.documentElement.scrollHeight - innerHeight;
+  fill.style.width = (max > 0 ? scrollY / max * 100 : 0) + "%";
+  let k = 0; heads.forEach((h,j) => { if (h.getBoundingClientRect().top < 140) k = j; });
+  links.forEach((a,j) => a.classList.toggle("on", j===k));
+}
+addEventListener("scroll", onScroll, {passive:true}); onScroll();
+prose.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", () => {
+  navigator.clipboard && navigator.clipboard.writeText(b.closest(".code").querySelector("code").innerText).catch(()=>{});
+  b.textContent = "Copiado"; setTimeout(() => b.textContent = "Copiar", 1400);
+}));
+document.getElementById("copylink").addEventListener("click", e => {
+  navigator.clipboard && navigator.clipboard.writeText(location.href).catch(()=>{});
+  e.target.textContent = "Enlace copiado"; setTimeout(() => e.target.textContent = "Copiar enlace", 1400);
+});
+}).catch(Site.fail);
+</script>
+<div class="cmdk" hidden="" id="cmdk"><div class="cmdk-bg" data-close=""></div>
+<div aria-label="Buscar" aria-modal="true" class="cmdk-box" role="dialog"><div class="cmdk-in"><span aria-hidden="true">›</span><input aria-controls="cmdk-list" autocomplete="off" id="cmdk-q" placeholder="Buscar entradas, proyectos, páginas…" type="search"/><kbd data-close="">Esc</kbd></div>
+<ul class="cmdk-list" id="cmdk-list" role="listbox"></ul><div class="cmdk-foot"><span>↑↓ moverse</span><span>↵ abrir</span><span id="cmdk-n"></span></div></div></div></body></html>

@@ -1,0 +1,39 @@
+/* Extensión de prosa.css para lo que el handoff no diseñó: tablas y figuras en las entradas.
+   No es parte del diseño de Claude Design: usa su mismo lenguaje (borde --line-hi, fondo de
+   .code y .note, rótulos en --vt) para que calce. Si un handoff futuro trae tablas o figuras,
+   ese estilo reemplaza a este. */
+
+.prose table{width:100%;border-collapse:collapse;border:1px solid var(--line-hi);font-size:14px;line-height:1.5;font-variant-numeric:tabular-nums}
+.prose th,.prose td{padding:9px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.prose thead th{background:var(--panel-2);font-family:var(--vt);font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--low)}
+.prose td{color:var(--mid)}
+.prose td strong{color:var(--hi)}
+.prose tbody tr:last-child td{border-bottom:0}
+
+.prose figure{margin:1.6em 0 0;border:1px solid var(--line-hi);background:#12140c}
+.prose figure img{display:block;width:100%;height:auto}
+.prose figcaption{padding:9px 14px;border-top:1px solid var(--line);font-family:var(--vt);font-weight:500;font-size:12px;letter-spacing:.04em;line-height:1.5;color:var(--low)}
+
+/* En pantallas chicas la tabla se desliza de lado en vez de apretar las columnas */
+@media (max-width:600px){.prose table{display:block;overflow-x:auto;white-space:nowrap}}
+/* La entrada usa todo el ancho de su columna, y el título no se corta en tres líneas (pedido del dueño el 2026-09-30; el diseño traía 68ch y 32ch) */
+#prose{max-width:none}
+.phead h1{max-width:none}
+.prose figure picture{display:block}
+/* Portada sin imagen (pedido del dueño el 2026-09-30): más baja, para que el texto empiece antes, el título en una
+   línea y el ongoro de contorno de fondo, entre la textura (::before) y el texto. El diseño traía min-height 230px. */
+.cover-term{min-height:0;padding:36px 20px 38px}
+.cover-term .t{max-width:none}
+.cover-term .ongoro-svg{position:absolute;right:150px;top:22px;height:calc(100% + 30px);width:auto;opacity:.5;filter:drop-shadow(0 0 10px rgba(198,168,75,.25));-webkit-mask-image:linear-gradient(#000 55%,transparent 92%);mask-image:linear-gradient(#000 55%,transparent 92%)}
+@media(max-width:700px){.cover-term{min-height:0;padding:26px 16px 28px}.cover-term .ongoro-svg{right:18px;top:40px;height:calc(100% - 30px)}}
+/* Aire entre la portada y el cuerpo de la entrada: 15px más que el padding-top del diseño (24px) */
+:is(.cover-term,.cover)+.grid>.col,:is(.cover-term,.cover)+.grid>aside{padding-top:39px}
+/* Cabecera y lectura, pedido del dueño el 2026-10-12: el título va solo en la portada (la cabecera lo repetía),
+   la cabecera queda más baja, la bajada se destaca en un recuadro y el cuerpo sube de contraste (--mid cansaba). */
+.phead{padding-top:22px;padding-bottom:20px}
+.phead .crumbs{margin-bottom:12px}
+.phead .meta{margin-top:10px}
+.cover-term .t.largo{font-size:clamp(24px,3.4vw,40px);line-height:1.12;max-width:32ch}
+#prose{color:#e2e6d2}
+#prose .lead{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--gold);padding:20px 24px;font-size:17px;color:var(--hi)}
+@media(max-width:700px){#prose .lead{padding:16px 18px;font-size:16px}}

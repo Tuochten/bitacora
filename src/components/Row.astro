@@ -1,0 +1,38 @@
+---
+import { postHref, isProj } from '../lib/sitio.js';
+import { portada } from '../lib/portada.js';
+import { ongoroSVG } from '../lib/ongoro.js';
+
+type Props = {
+  post: {
+    id?: string;
+    slug?: string;
+    category?: string;
+    date?: Date | string;
+    title: string;
+    description: string;
+    readingTime?: string;
+    featured?: boolean;
+    cover?: string;
+  };
+  oculta?: boolean;
+};
+
+const { post, oculta = false }: Props = Astro.props;
+
+const postHrefValue = postHref(post);
+const dateValue = post.date ? (post.date instanceof Date ? post.date.toISOString().split('T')[0] : post.date.split('T')[0]) : '';
+const categoryValue = post.category || '';
+const foto = portada(post);
+---
+
+<article class="row" data-x-cat={categoryValue} data-x-destacado={post.featured ? 'si' : 'no'} hidden={oculta}>
+{foto
+  ? <img alt="" class="th" src={foto} width="136" height="86" loading="lazy" decoding="async">
+  : <div aria-hidden="true" class="th th-og"><Fragment set:html={ongoroSVG(60)} /></div>}
+
+<div>
+<div class="meta"><time class="ts" datetime={dateValue}>{dateValue}</time>{isProj(post) && <span class={post.project.state === 'activo' ? 'kind' : 'kind w'}><i aria-hidden="true"></i>Proyecto · {post.project.state}</span>}<span class={`cat ${categoryValue}`}>{categoryValue}</span><span class="rd">{post.readingTime || '3'}</span></div>
+
+<h3><a class="ti" href={postHrefValue}>{post.title}</a></h3>
+<p class="de">{post.description}</p></div></article>

@@ -1,0 +1,23 @@
+// Cloudflare Workers: el sitio estático (dist/) más un Worker chico solo para /api/*.
+// Ver PLAN-FORMULARIO.md. Lo que es privado (el Gmail de destino y la clave secreta de Turnstile)
+// NO va aquí: son secrets del Worker, puestos en el panel (Settings → Variables and Secrets).
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "wlaque",
+	"main": "worker/index.js",
+	"compatibility_date": "2026-09-30",
+	"assets": {
+		"directory": "./dist",
+		"binding": "ASSETS",
+		// el resto del sitio se sirve directo, sin pasar por el Worker
+		"run_worker_first": ["/api/*"]
+	},
+	// Email Routing: sin restricción de destino, porque el destino es el secret DESTINO,
+	// que tiene que ser una dirección verificada en Email Routing
+	"send_email": [{ "name": "CORREO" }],
+	// a lo más 3 envíos por minuto desde una misma IP
+	"ratelimits": [{ "name": "LIMITE", "namespace_id": "1001", "simple": { "limit": 3, "period": 60 } }],
+	"vars": {
+		"REMITENTE": "formulario@wlaque.cl"
+	}
+}

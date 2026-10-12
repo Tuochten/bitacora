@@ -1,0 +1,21 @@
+---
+import site from '../data/site.json';
+type Props = {
+  active: string;
+};
+const { active = '' } = Astro.props;
+---
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="top"><a aria-label="wlaque.cl, inicio" class="brand" href="/"><img alt="" class="avatar" height="44" src="/assets/avatar-face.png" width="44"/><span><b>wlaque.cl</b><span class="sub">{site.profile.handle}</span></span></a>
+
+<button aria-controls="menu" aria-expanded="false" class="menu-btn" type="button">Menú</button>
+
+<nav aria-label="Principal" class="menu" id="menu">{site.nav.map(n => <a href={n.href} data-nav={n.id} class={n.id === active ? 'on' : undefined} aria-current={n.id === active ? 'page' : undefined}>{n.label}</a>)}</nav>
+
+<button aria-label="Buscar en el sitio" class="hslot search" data-open-search="" type="button"><svg aria-hidden="true" height="14" viewBox="0 0 16 16" width="14"><circle cx="7" cy="7" fill="none" r="5" stroke="currentColor" stroke-width="1.6"></circle><path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.6"></path></svg><span class="ph">Buscar…</span><kbd>Ctrl K</kbd></button></header>
+
+<script>
+const btn = document.querySelector('.menu-btn'), menu = document.getElementById('menu');
+btn.addEventListener('click', () => { const o = menu.classList.toggle('open'); btn.setAttribute('aria-expanded', o ? 'true' : 'false'); });
+</script>

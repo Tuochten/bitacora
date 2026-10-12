@@ -1,0 +1,45 @@
+/* prosa.css — lectura larga (entradas, proyectos, sobre mí) */
+.readbar{position:sticky;top:0;z-index:30;height:3px;background:transparent}
+.readbar i{display:block;height:100%;width:0;background:var(--gold);box-shadow:0 0 8px rgba(210,179,83,.5)}
+.prose{max-width:68ch;font-size:15.5px;line-height:1.8;color:var(--mid)}
+.prose>*+*{margin-top:1.1em}
+.prose .lead{font-size:17px;line-height:1.72;color:var(--hi)}
+.prose h2{font-family:var(--jb);font-weight:800;font-size:24px;line-height:1.25;letter-spacing:-.02em;color:var(--hi);margin-top:2.1em;scroll-margin-top:24px}
+.prose h2 .n{color:var(--gold);margin-right:.5em;font-weight:700}
+.prose h3{font-size:17.5px;font-weight:600;color:var(--hi);margin-top:1.8em;scroll-margin-top:24px}
+.prose strong{color:var(--hi);font-weight:600}
+.prose a{text-decoration:underline;text-decoration-color:var(--line-hi);text-underline-offset:3px}
+.prose a:hover{text-decoration-color:var(--gold)}
+.prose ul{list-style:none;padding:0}
+.prose li{position:relative;padding-left:22px;margin-top:.45em}
+.prose li::before{content:"›";position:absolute;left:4px;color:var(--gold)}
+.ic{font-size:.88em;color:var(--gold-hi);background:#15180e;border:1px solid var(--line);padding:1px 6px;white-space:nowrap}
+.code{border:1px solid var(--line-hi);background:#12140c;margin-top:1.6em}
+.code-h{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:0 6px 0 14px;min-height:40px;border-bottom:1px solid var(--line);font-family:var(--vt);font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--low)}
+.code-h button{min-height:34px;padding:0 12px;border:1px solid var(--line);color:var(--mid);font-family:var(--vt);font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.code-h button:hover{border-color:var(--gold);color:var(--gold)}
+.code pre{margin:0;padding:16px;overflow-x:auto;font-size:13px;line-height:1.65;color:var(--hi);tab-size:2}
+.code pre .c{color:var(--low)}
+.note{border:1px solid var(--line-hi);background:var(--panel-2);padding:14px 16px;font-size:14.5px;line-height:1.7}
+.note .k{display:block;font-family:var(--vt);font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.note.warn{border-color:#6a4a2c}.note.warn .k{color:var(--rust)}
+.cover{display:block;width:100%;aspect-ratio:16/7;background:#181b10 repeating-linear-gradient(135deg,transparent 0 6px,rgba(255,255,255,.025) 6px 7px);border-bottom:1px solid var(--line);object-fit:cover}
+.toc{list-style:none;margin-bottom:24px}
+.toc li{padding:0}.toc li::before{content:none}
+.toc a{display:grid;grid-template-columns:28px 1fr;gap:6px;padding:8px 10px;border-left:2px solid transparent;color:var(--mid);font-size:13.5px;line-height:1.45}
+.toc a:hover{color:var(--hi);background:rgba(255,255,255,.03)}
+.toc a.on{color:var(--gold);border-left-color:var(--gold);background:rgba(198,168,75,.08)}
+.toc .n{font-family:var(--vt);font-weight:500;font-size:12px;color:var(--low)}
+.sticky{position:sticky;top:18px}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:13.5px;margin-bottom:24px}
+.facts dt{color:var(--low)}.facts dd{color:var(--hi);text-align:right}
+.share{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px}
+.share a,.share button{min-height:40px;display:inline-flex;align-items:center;padding:0 12px;border:1px solid var(--line);font-size:13.5px;color:var(--mid)}
+.share a:hover,.share button:hover{border-color:var(--gold);color:var(--gold)}
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:40px}
+.pager a{display:block;background:var(--panel-2);padding:16px 18px;color:var(--hi);font-size:14.5px;font-weight:600;line-height:1.4}
+.pager a:hover{background:#262a1a;color:var(--gold-hi)}
+.pager a span{display:block;font-family:var(--vt);font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--low);font-weight:400;margin-bottom:4px}
+.pager a:last-child{text-align:right}
+@media(max-width:960px){.sticky{position:static}.side-toc{display:none}}
+@media(max-width:600px){.pager{grid-template-columns:1fr}.pager a:last-child{text-align:left}.prose{font-size:15px}.prose h2{font-size:21px}}

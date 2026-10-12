@@ -1,0 +1,723 @@
+{
+  "version": "2.1.0",
+  "date": "2026-09-29",
+  "profile": {
+    "name": "Wladimir Aqueveque H.",
+    "nameSplit": [
+      "Wladimir",
+      "Aqueveque H."
+    ],
+    "handle": "~/web-personal",
+    "role": "Profesional TI · Ciberseguridad · WebDev · Estudiante de Ingeniería.",
+    "bio": "Profesional TI con más de 13 años de experiencia en soporte técnico, infraestructura y administración de plataformas (Windows, macOS y Linux, Google Workspace, DNS, DHCP y hosting), liderando equipos técnicos. Actualmente enfocado en ciberseguridad y TI corporativo, integrando experiencia práctica en infraestructura, sitios web, atención a usuarios y resolución de incidentes con una visión orientada a la protección de activos tecnológicos.",
+    "freelance": {
+      "label": "Freelance web",
+      "projects": "+150",
+      "projectsLabel": "proyectos web",
+      "stack": [
+        [
+          "Webflow",
+          "sitios informativos"
+        ],
+        [
+          "Shopify",
+          "e-commerce"
+        ]
+      ],
+      "extra": "y rescates de WordPress",
+      "cta": "Contáctame →",
+      "href": "desarrollo-web.html"
+    },
+    "email": "contacto@wlaque.cl",
+    "linkedin": "https://www.linkedin.com/in/wladimir-aqueveque",
+    "about": [
+      "Profesional TI con más de 13 años de experiencia en soporte técnico, desarrollo web y administración de plataformas (hosting, DNS, correos), con más de 100 proyectos WordPress y WooCommerce implementados.",
+      "Actualmente Desarrollador Web / Líder Técnico en agencia digital: lidero el equipo de programación y el área de soporte, e impulso la integración de IA en los procesos de desarrollo con Claude Code (agentes, MCP) sobre Webflow y Shopify.",
+      "En formación continua en ciberseguridad: Diplomado en Ciberseguridad (UDD, 2024), Ingeniería en Ciberseguridad y Auditoría en curso (USS) y preparación de la certificación CompTIA Security+.",
+      "Fuera del trabajo administro un homelab Linux: Docker, DNS con Pi-hole, respaldos restic y acceso por Tailscale, IA local autoalojada (llama.cpp, Open WebUI) y laboratorios de pentesting KVM/QEMU."
+    ]
+  },
+  "now": [
+    {
+      "tone": "",
+      "label": "Estudiando",
+      "value": "Ingeniería en Ciberseguridad y Auditoría",
+      "note": "Universidad San Sebastián · 2026 →"
+    },
+    {
+      "tone": "plum",
+      "label": "Preparando",
+      "value": "CompTIA Security+ (SY0-701)",
+      "note": "Examen durante 2026"
+    },
+    {
+      "tone": "sage",
+      "label": "Trabajando",
+      "value": "Desarrollador Web / Líder Técnico",
+      "note": "Bigbuda · 2019 →"
+    }
+  ],
+  "skills": [
+    {
+      "group": "Día a día",
+      "items": [
+        {
+          "name": "Webflow y Shopify",
+          "primary": true
+        },
+        {
+          "name": "Claude Code (agentes, MCP)",
+          "primary": true
+        },
+        {
+          "name": "DNS, hosting y correos",
+          "primary": true
+        },
+        {
+          "name": "WordPress y WooCommerce",
+          "primary": false
+        }
+      ]
+    },
+    {
+      "group": "Homelab",
+      "items": [
+        {
+          "name": "Docker y Pi-hole",
+          "primary": false
+        },
+        {
+          "name": "restic y Tailscale",
+          "primary": false
+        },
+        {
+          "name": "llama.cpp y Open WebUI",
+          "primary": false
+        }
+      ]
+    },
+    {
+      "group": "Seguridad",
+      "items": [
+        {
+          "name": "Kali Linux y Metasploit",
+          "primary": false
+        },
+        {
+          "name": "Burp Suite y Wireshark",
+          "primary": false
+        },
+        {
+          "name": "NIST CSF",
+          "primary": false
+        }
+      ]
+    }
+  ],
+  "tags": [
+    "Todos",
+    "Dev",
+    "Ciberseguridad",
+    "Homelab",
+    "Webflow",
+    "Astro"
+  ],
+  "posts": [
+    {
+      "slug": "migrar-ordenes-woocommerce",
+      "category": "Dev",
+      "featured": true,
+      "title": "Migrar órdenes WooCommerce entre ambientes sin morir en el intento",
+      "shortTitle": "Migrar órdenes WooCommerce",
+      "description": "Cómo migrar pedidos de producción a QA usando SQL directo y phpMyAdmin, sin romper nada en el camino.",
+      "date": "2025-04-20",
+      "readingTime": "8 min",
+      "cover": "assets/covers/migrar-ordenes-woocommerce.jpg",
+      "tags": [
+        "WooCommerce",
+        "SQL"
+      ],
+      "type": "entrada"
+    },
+    {
+      "slug": "homelab",
+      "category": "Homelab",
+      "featured": false,
+      "title": "Pi-hole + Nextcloud + VPN en Docker: mi stack personal",
+      "shortTitle": "Pi-hole + Nextcloud + VPN",
+      "description": "Tres contenedores que reemplazan medio Google sin pagar suscripciones ni entregar tus datos.",
+      "date": "2025-03-12",
+      "readingTime": "8 min",
+      "cover": "assets/covers/homelab.jpg",
+      "tags": [
+        "Docker"
+      ],
+      "type": "entrada"
+    },
+    {
+      "slug": "ciberseg-1",
+      "category": "Ciberseguridad",
+      "featured": false,
+      "title": "Primer año estudiando seguridad: lo que nadie te dice",
+      "shortTitle": "Primer año estudiando seguridad",
+      "description": "El imposter syndrome no se va, pero se domestica. Notas de un CTO volviendo a primer semestre.",
+      "date": "2025-02-28",
+      "readingTime": "5 min",
+      "cover": null,
+      "tags": [],
+      "type": "entrada"
+    },
+    {
+      "slug": "dns-fail",
+      "category": "Webflow",
+      "featured": false,
+      "title": "DNS, Hosting y todo lo que falla en silencio",
+      "description": "Por qué tu sitio se cae los domingos a las 3 AM y nadie te avisa hasta el lunes.",
+      "date": "2025-01-14",
+      "readingTime": "6 min",
+      "cover": null,
+      "tags": [],
+      "type": "entrada"
+    },
+    {
+      "slug": "wp-import",
+      "category": "Dev",
+      "featured": false,
+      "title": "Importar productos WooCommerce con WP All Import PRO",
+      "shortTitle": "Importar productos con WP All Import",
+      "description": "Mapeo de campos, imágenes destacadas y galerías. La guía que hubiera querido encontrar.",
+      "date": "2025-01-08",
+      "readingTime": "11 min",
+      "cover": null,
+      "tags": [],
+      "type": "entrada"
+    },
+    {
+      "slug": "astro",
+      "category": "Astro",
+      "featured": false,
+      "title": "Por qué reconstruí este blog en Astro (y casi vuelvo a WordPress)",
+      "description": "Ganas en velocidad, pierdes en comodidad. El balance honesto después de tres meses.",
+      "date": "2024-12-20",
+      "readingTime": "7 min",
+      "cover": null,
+      "tags": [],
+      "type": "entrada"
+    },
+    {
+      "slug": "nmap-sin-miedo",
+      "category": "Ciberseguridad",
+      "featured": false,
+      "title": "Nmap sin miedo: escaneos básicos para tu propia red",
+      "shortTitle": "Nmap sin miedo",
+      "description": "Qué escanear, qué no y cómo leer el resultado sin asustarte con cada puerto abierto.",
+      "date": "2024-12-05",
+      "readingTime": "6 min",
+      "cover": null,
+      "tags": [],
+      "sample": true,
+      "type": "entrada"
+    },
+    {
+      "slug": "proxmox-en-un-mini-pc",
+      "category": "Homelab",
+      "featured": false,
+      "title": "Proxmox en un mini PC usado: lo que aprendí la primera semana",
+      "shortTitle": "Proxmox en un mini PC",
+      "description": "Hardware barato, almacenamiento mal planeado y la primera VM que no arrancó.",
+      "date": "2024-11-22",
+      "readingTime": "9 min",
+      "cover": null,
+      "tags": [],
+      "sample": true,
+      "type": "entrada"
+    },
+    {
+      "slug": "webflow-para-clientes",
+      "category": "Webflow",
+      "featured": false,
+      "title": "Webflow para clientes que nunca van a abrir el Designer",
+      "shortTitle": "Webflow para clientes",
+      "description": "Cómo armar el CMS y los permisos para que el cliente edite contenido sin romper el diseño.",
+      "date": "2024-11-08",
+      "readingTime": "5 min",
+      "cover": null,
+      "tags": [],
+      "sample": true,
+      "type": "entrada"
+    },
+    {
+      "slug": "respaldos-de-wordpress",
+      "category": "Dev",
+      "featured": false,
+      "title": "Respaldos de WordPress que sí se pueden restaurar",
+      "shortTitle": "Respaldos de WordPress",
+      "description": "Un respaldo que nunca probaste restaurar no es un respaldo. Mi rutina mensual.",
+      "date": "2024-10-25",
+      "readingTime": "7 min",
+      "cover": null,
+      "tags": [],
+      "sample": true,
+      "type": "entrada"
+    },
+    {
+      "slug": "gestores-y-2fa",
+      "category": "Ciberseguridad",
+      "featured": false,
+      "title": "Contraseñas, gestores y 2FA para equipos pequeños",
+      "shortTitle": "Gestores y 2FA",
+      "description": "Lo mínimo que implementaría en cualquier oficina de menos de veinte personas.",
+      "date": "2024-10-11",
+      "readingTime": "6 min",
+      "cover": null,
+      "tags": [],
+      "sample": true,
+      "type": "entrada"
+    },
+    {
+      "slug": "colecciones-en-astro",
+      "category": "Astro",
+      "featured": false,
+      "title": "Colecciones de contenido en Astro explicadas con un blog real",
+      "shortTitle": "Colecciones en Astro",
+      "description": "Esquemas, fechas y borradores: cómo está armado el contenido de este sitio.",
+      "date": "2024-09-27",
+      "readingTime": "8 min",
+      "cover": null,
+      "tags": [],
+      "sample": true,
+      "type": "entrada"
+    },
+    {
+      "slug": "vlans-en-casa",
+      "category": "Homelab",
+      "featured": false,
+      "title": "VLANs en casa: separar IoT, invitados y trabajo",
+      "shortTitle": "VLANs en casa",
+      "description": "Tres redes, un switch administrable y las reglas de firewall que las mantienen separadas.",
+      "date": "2024-09-13",
+      "readingTime": "10 min",
+      "cover": null,
+      "tags": [],
+      "sample": true,
+      "type": "entrada"
+    },
+    {
+      "slug": "spf-dkim-y-dmarc",
+      "category": "Dev",
+      "featured": false,
+      "title": "SPF, DKIM y DMARC sin dolor de cabeza",
+      "shortTitle": "SPF, DKIM y DMARC",
+      "description": "Los tres registros DNS que deciden si tu correo llega a la bandeja o a spam.",
+      "date": "2024-08-30",
+      "readingTime": "6 min",
+      "cover": null,
+      "tags": [],
+      "sample": true,
+      "type": "entrada"
+    },
+    {
+      "slug": "wordpress-a-webflow",
+      "category": "Webflow",
+      "featured": false,
+      "title": "Migrar un sitio de WordPress a Webflow sin perder SEO",
+      "shortTitle": "WordPress a Webflow",
+      "description": "Redirecciones, estructura de URLs y lo que hay que revisar antes de cambiar el DNS.",
+      "date": "2024-08-16",
+      "readingTime": "9 min",
+      "cover": null,
+      "tags": [],
+      "sample": true,
+      "type": "entrada"
+    },
+    {
+      "slug": "wireshark-en-la-oficina",
+      "category": "Ciberseguridad",
+      "featured": false,
+      "title": "Wireshark en la red de la oficina: primeras capturas",
+      "shortTitle": "Wireshark en la oficina",
+      "description": "Qué mirar en una captura cuando no sabes qué estás buscando.",
+      "date": "2024-08-02",
+      "readingTime": "7 min",
+      "cover": null,
+      "tags": [],
+      "sample": true,
+      "type": "entrada"
+    },
+    {
+      "slug": "shopify-desde-woocommerce",
+      "category": "Dev",
+      "featured": false,
+      "title": "Shopify para quien viene de WooCommerce",
+      "shortTitle": "Shopify desde WooCommerce",
+      "description": "Lo que se gana, lo que se pierde y lo que cuesta cada app que reemplaza un plugin.",
+      "date": "2024-07-19",
+      "readingTime": "8 min",
+      "cover": null,
+      "tags": [],
+      "sample": true,
+      "type": "entrada"
+    },
+    {
+      "slug": "uptime-kuma",
+      "category": "Homelab",
+      "featured": false,
+      "title": "Uptime Kuma: monitoreo casero que avisa antes que el cliente",
+      "shortTitle": "Uptime Kuma",
+      "description": "Un contenedor, un bot de Telegram y nunca más enterarse el lunes.",
+      "date": "2024-07-05",
+      "readingTime": "5 min",
+      "cover": null,
+      "tags": [],
+      "sample": true,
+      "type": "entrada"
+    },
+    {
+      "slug": "imagenes-en-astro",
+      "category": "Astro",
+      "featured": false,
+      "title": "Imágenes en Astro: formatos, tamaños y lazy loading",
+      "shortTitle": "Imágenes en Astro",
+      "description": "Cómo sirvo AVIF y WebP sin escribir un solo srcset a mano.",
+      "date": "2024-06-21",
+      "readingTime": "6 min",
+      "cover": null,
+      "tags": [],
+      "sample": true,
+      "type": "entrada"
+    },
+    {
+      "slug": "homelab-proxmox",
+      "type": "proyecto",
+      "category": "Homelab",
+      "featured": false,
+      "title": "Homelab Linux",
+      "description": "Nodo Linux en casa con Docker, Pi-hole, restic, Tailscale e IA local. Mi campo de pruebas para todo lo que después va a producción.",
+      "date": "2026-07-02",
+      "readingTime": "3 min",
+      "cover": null,
+      "tags": [],
+      "project": {
+        "state": "activo",
+        "since": "2023 →",
+        "stack": "Docker · Pi-hole · restic · Tailscale",
+        "kind": "Personal"
+      },
+      "body": [
+        "Un solo nodo Linux en casa con Docker: DNS con Pi-hole, respaldos con restic, acceso remoto por Tailscale e IA local autoalojada con llama.cpp y Open WebUI.",
+        "Existe para probar en casa lo que después toco en el trabajo: cambios de DNS, respaldos y actualizaciones. Si algo se rompe acá, el único afectado soy yo."
+      ]
+    },
+    {
+      "slug": "wlaque-cl",
+      "type": "proyecto",
+      "category": "Astro",
+      "featured": false,
+      "title": "wlaque.cl",
+      "description": "Reconstrucción del blog desde WordPress. Contenido en archivos, build estático, cero plugins.",
+      "date": "2026-09-20",
+      "readingTime": "3 min",
+      "cover": null,
+      "tags": [],
+      "project": {
+        "state": "en curso",
+        "since": "2025 →",
+        "stack": "Astro · Markdown · Netlify",
+        "kind": "Personal"
+      },
+      "body": [
+        "Reconstrucción de este sitio desde WordPress a Astro. El contenido vive en archivos Markdown, el build es estático y no depende de plugins.",
+        "El objetivo es un sitio rápido, fácil de mantener y que sirva de ejemplo de cómo trabajo la parte técnica de un proyecto web."
+      ]
+    },
+    {
+      "slug": "utilidades-woocommerce",
+      "type": "proyecto",
+      "category": "Dev",
+      "featured": false,
+      "title": "Utilidades WooCommerce",
+      "description": "Scripts internos para migrar órdenes, importar catálogos y reparar metadatos entre ambientes.",
+      "date": "2025-11-10",
+      "readingTime": "3 min",
+      "cover": null,
+      "tags": [],
+      "project": {
+        "state": "activo",
+        "since": "2022 →",
+        "stack": "PHP · SQL · WP-CLI",
+        "kind": "Trabajo"
+      },
+      "body": [
+        "Scripts internos para tareas repetitivas de WooCommerce: migrar órdenes entre ambientes, importar catálogos y reparar metadatos.",
+        "Nacieron de problemas reales en producción y se fueron ordenando hasta quedar como una caja de herramientas reutilizable."
+      ]
+    },
+    {
+      "slug": "laboratorio-pentesting",
+      "type": "proyecto",
+      "category": "Ciberseguridad",
+      "featured": false,
+      "title": "Laboratorio de pentesting",
+      "description": "Laboratorio KVM/QEMU aislado para practicar lo que voy viendo en la carrera y en Security+.",
+      "date": "2026-08-15",
+      "readingTime": "3 min",
+      "cover": null,
+      "tags": [],
+      "project": {
+        "state": "aprendiendo",
+        "since": "2025 →",
+        "stack": "KVM · QEMU · Kali · Metasploit",
+        "kind": "Estudio"
+      },
+      "body": [
+        "Máquinas virtuales con KVM/QEMU en una red aislada para practicar pentesting en entornos controlados con Kali Linux, Metasploit, Burp Suite y Wireshark.",
+        "Es el lugar donde aplico lo que voy viendo en la carrera y en la preparación de Security+, sin tocar nada que le importe a alguien."
+      ]
+    }
+  ],
+  "nav": [
+    {
+      "id": "inicio",
+      "label": "Inicio",
+      "href": "index.html"
+    },
+    {
+      "id": "blog",
+      "label": "Blog",
+      "href": "blog.html"
+    },
+    {
+      "id": "web",
+      "label": "Desarrollo web",
+      "href": "desarrollo-web.html"
+    },
+    {
+      "id": "sobre",
+      "label": "Sobre mí",
+      "href": "sobre-mi.html"
+    },
+    {
+      "id": "contacto",
+      "label": "Contacto",
+      "href": "contacto.html"
+    }
+  ],
+  "social": [
+    {
+      "label": "GitHub",
+      "href": "#"
+    },
+    {
+      "label": "LinkedIn",
+      "href": "https://www.linkedin.com/in/wladimir-aqueveque"
+    },
+    {
+      "label": "RSS",
+      "href": "/rss.xml"
+    }
+  ],
+  "settings": {
+    "postsPerPage": 8,
+    "homeRecent": 5,
+    "shortTitleMax": 42
+  },
+  "webdev": {
+    "lede": "Sitios en Webflow y tiendas en Shopify, con el dominio, el DNS y el correo bien configurados desde el primer día.",
+    "services": [
+      {
+        "platform": "Webflow",
+        "title": "Sitio informativo",
+        "tier": "principal",
+        "description": "Sitios corporativos, landing pages y portafolios que puedes editar sin tocar código.",
+        "includes": "Diseño · CMS · SEO base · Formularios"
+      },
+      {
+        "platform": "Shopify",
+        "title": "Tienda online",
+        "tier": "principal",
+        "description": "Tiendas nuevas o migradas, con catálogo, pagos y envíos configurados.",
+        "includes": "Tema · Catálogo · Pagos · Envíos"
+      },
+      {
+        "platform": "WordPress",
+        "title": "Rescate o migración",
+        "tier": "secundario",
+        "description": "Sitios desatendidos: actualización, limpieza y seguridad, o migración a otra plataforma.",
+        "includes": "Auditoría · Actualización · Migración"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Conversación",
+        "text": "Una llamada corta para entender qué necesitas y qué ya tienes."
+      },
+      {
+        "title": "Propuesta",
+        "text": "Alcance, plazos y valor por escrito."
+      },
+      {
+        "title": "Construcción",
+        "text": "Avances revisables en un sitio de prueba."
+      },
+      {
+        "title": "Entrega",
+        "text": "Publicación, capacitación de uso y accesos documentados."
+      }
+    ],
+    "included": [
+      "Dominio y DNS configurados",
+      "Correo con SPF, DKIM y DMARC",
+      "Certificado SSL",
+      "Respaldo inicial y accesos documentados"
+    ],
+    "response": "1–2 días hábiles"
+  },
+  "inProgress": [
+    {
+      "kind": "Carrera",
+      "title": "Ingeniería en Ciberseguridad y Auditoría",
+      "org": "Universidad San Sebastián",
+      "detail": "Modalidad online, compatible con jornada laboral",
+      "when": "2026 → en curso"
+    },
+    {
+      "kind": "Certificación",
+      "title": "CompTIA Security+ (SY0-701)",
+      "org": "Preparación con curso completo y exámenes de práctica (Udemy)",
+      "detail": "Examen a rendir durante 2026",
+      "when": "En curso"
+    }
+  ],
+  "education": [
+    {
+      "title": "Ingeniería en Ciberseguridad y Auditoría",
+      "org": "Universidad San Sebastián",
+      "when": "2026 – actualidad",
+      "note": "En curso · modalidad online"
+    },
+    {
+      "title": "Diplomado en Ciberseguridad",
+      "org": "UDD",
+      "when": "Sep – Dic 2024",
+      "note": "120 h · nota 6,7/7,0 · proyecto de título 6,9: riesgos NIST CSF en sitio productivo"
+    },
+    {
+      "title": "Técnico en Diseño y Programación Multimedia",
+      "org": "INACAP",
+      "when": "2010 – 2012",
+      "note": ""
+    }
+  ],
+  "training": [
+    {
+      "title": "CompTIA Security+ (SY0-701) Complete Course & Practice Exam",
+      "org": "Udemy",
+      "when": "En curso",
+      "note": "Para rendir el examen CompTIA Security+"
+    },
+    {
+      "title": "Cisco: CCNA Introduction to Networks · Python Essentials 1",
+      "org": "Cisco Networking Academy",
+      "when": "Sep 2026",
+      "note": "Badges verificados en Credly: switching, IPv4/IPv6 y subnetting; Python"
+    },
+    {
+      "title": "Curso completo de Hacking Ético y Ciberseguridad",
+      "org": "Udemy",
+      "when": "May 2025",
+      "note": "21,5 h · pentesting en entornos controlados: Kali Linux, Metasploit, Burp Suite, Wireshark"
+    }
+  ],
+  "tools": [
+    {
+      "group": "Desarrollo web",
+      "items": [
+        "Claude Code",
+        "Webflow",
+        "Shopify",
+        "WordPress",
+        "WooCommerce",
+        "Cloudflare"
+      ]
+    },
+    {
+      "group": "Sistemas y redes",
+      "items": [
+        "Windows",
+        "Linux",
+        "macOS",
+        "KVM · QEMU",
+        "Pi-hole",
+        "Redes IPv4/IPv6"
+      ]
+    },
+    {
+      "group": "Seguridad",
+      "items": [
+        "Kali Linux",
+        "Metasploit",
+        "Burp Suite",
+        "Wireshark"
+      ]
+    },
+    {
+      "group": "Programación",
+      "items": [
+        "Python"
+      ]
+    },
+    {
+      "group": "Gestión y soporte",
+      "items": [
+        "Jira",
+        "Asana",
+        "SupportPal"
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "name": "Español",
+      "level": "Nativo"
+    },
+    {
+      "name": "Inglés",
+      "level": "C2 Proficient",
+      "note": "EF SET 73/100"
+    }
+  ],
+  "attributes": [
+    "Liderazgo",
+    "Resolución de problemas",
+    "Comunicación técnica",
+    "Proactividad y autonomía",
+    "Trabajo en equipo"
+  ],
+  "contact": {
+    "response": "1–2 días hábiles",
+    "timezone": "America/Santiago",
+    "hours": [
+      9,
+      19
+    ],
+    "calendar": "https://cal.com/wlaque/20min",
+    "pgp": {
+      "fingerprint": "XXXX XXXX XXXX XXXX XXXX  XXXX XXXX XXXX XXXX XXXX",
+      "href": "/pgp.asc"
+    }
+  },
+  "types": [
+    {
+      "id": "todo",
+      "label": "Todo"
+    },
+    {
+      "id": "entrada",
+      "label": "Entradas"
+    },
+    {
+      "id": "proyecto",
+      "label": "Proyectos"
+    }
+  ]
+}

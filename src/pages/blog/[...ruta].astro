@@ -1,0 +1,67 @@
+---
+// Listado del blog (handoff/blog.html). Genera una página estática por cada combinación de
+// tipo, tema y número de página, con las rutas del README del handoff:
+//   /blog/ · /blog/2/ · /blog/entradas/ · /blog/proyectos/ · /blog/tema/homelab/ · /blog/proyectos/tema/homelab/2/
+// La página 1 nunca lleva número. Convive con [slug].astro: ningún slug de post es "entradas",
+// "proyectos", "tema" ni un número.
+import Base from '../../layouts/Base.astro';
+import Row from '../../components/Row.astro';
+import site from '../../data/site.json';
+import { paginas } from '../../lib/sitio.js';
+import { rutaBlog as ruta, hrefBlog as href, listaBlog as lista } from '../../lib/blog.js';
+import { ongoroSVG } from '../../lib/ongoro.js';
+import '../../styles/prosa.css';
+
+const PER = site.settings.postsPerPage;
+
+export function getStaticPaths() {
+  const PER = site.settings.postsPerPage;
+  const caminos = [];
+  for (const tipo of ['todo', 'entrada', 'proyecto']) {
+    for (const tema of site.tags) {
+      const n = Math.max(1, Math.ceil(lista(tipo, tema).length / PER));
+      for (let cur = 1; cur <= n; cur++) caminos.push({ params: { ruta: ruta(tipo, tema, cur) || undefined }, props: { tipo, tema, cur } });
+    }
+  }
+  return caminos;
+}
+
+const { tipo, tema, cur } = Astro.props;
+const todos = lista(tipo, tema);
+const n = Math.max(1, Math.ceil(todos.length / PER));
+const items = todos.slice((cur - 1) * PER, cur * PER);
+const tipoL = { todo: 'Todo', entrada: 'Entradas', proyecto: 'Proyectos' }[tipo];
+const cuenta = (ti, t) => site.posts.filter((p) => (ti === 'todo' || p.type === ti) && (t === 'Todos' || p.category === t)).length;
+// Miga: con filtros, "Blog" pasa a ser enlace y se agregan el tipo (enlace si hay tema) y el tema.
+const trail = [tipo !== 'todo' ? [tipoL, href(tipo, 'Todos', 1)] : null, tema !== 'Todos' ? [tema] : null].filter(Boolean);
+const titulo = ['Blog', tipo !== 'todo' ? tipoL : '', tema !== 'Todos' ? tema : ''].filter(Boolean).join(': ') + (cur > 1 ? ' — página ' + cur : '') + ' | wlaque.cl';
+const description = 'Todas las entradas de wlaque.cl: ciberseguridad, homelab, WordPress, WooCommerce, Webflow, DNS y hosting.';
+---
+<Base active="blog" title={titulo} description={description} canonical={'https://wlaque.cl' + href(tipo, tema, cur)}>
+<main id="contenido">
+<header class="phead">
+<nav class="crumbs" aria-label="Ruta"><a href="/">Inicio</a><span aria-hidden="true">›</span>{trail.length
+  ? <><a href="/blog/">Blog</a>{trail.map((c, k) => <><span aria-hidden="true">›</span>{k < trail.length - 1 ? <a href={c[1]}>{c[0]}</a> : <span aria-current="page">{c[0]}</span>}</>)}</>
+  : <span aria-current="page" id="crumb-last">Blog</span>}</nav>
+<h1 class="cursor" id="h1">Blog</h1>
+<p class="lede">Notas de trabajo y proyectos: infraestructura, e-commerce y lo que voy aprendiendo en ciberseguridad.</p>
+</header>
+<div class="grid">
+<div class="col">
+<section aria-labelledby="seclabel">
+<nav class="types" id="types" aria-label="Tipo de contenido">{site.types.map((t) => <a href={href(t.id, tema, 1)} aria-current={t.id === tipo ? 'page' : undefined}>{t.label}<span class="n">{cuenta(t.id, tema)}</span></a>)}</nav>
+<div class="sec"><h2 id="seclabel">{(tipo === 'todo' ? 'Todo' : tipoL) + (tema === 'Todos' ? '' : ' · ' + tema)}</h2><span class="r"></span><span class="c" id="count">{`${todos.length} resultados · página ${cur} de ${n}`}</span></div>
+<div class="log" id="log">{items.length
+  ? items.map((p) => <Row post={p} />)
+  : <div class="empty"><Fragment set:html={ongoroSVG(56)} /><p>Nada por acá todavía. Prueba otro filtro.</p></div>}</div>
+<Fragment set:html={paginas(n, cur, (i) => href(tipo, tema, i))} />
+</section>
+</div>
+<aside aria-label="Filtros">
+<h2 class="side-h">Filtrar por tema</h2>
+<nav class="filters" id="filters" aria-label="Temas">{site.tags.map((t) => <a href={href(tipo, t, 1)} aria-current={t === tema ? 'page' : undefined}><span>{t === 'Todos' ? 'Todos' : '› ' + t}</span><span class="n">{cuenta(tipo === 'todo' ? 'todo' : tipo, t)}</span></a>)}</nav>
+<div class="guard" id="guard"><Fragment set:html={ongoroSVG(48)} /><div class="cap">guardián · en vigilia</div></div>
+</aside>
+</div>
+</main>
+</Base>

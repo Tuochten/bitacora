@@ -1,0 +1,3 @@
+/* El atributo hidden pierde contra cualquier regla con display: (por ejemplo .rows { display: flex }).
+   Esto lo hace ganar siempre. Importar ANTES que el resto del CSS. */
+[hidden] { display: none !important; }

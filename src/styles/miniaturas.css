@@ -1,0 +1,4 @@
+/* miniaturas.css — se carga en todo el sitio (Base.astro): las miniaturas salen en el home, el blog y las relacionadas */
+.th-og{position:relative;overflow:hidden}
+.th-og::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(to bottom,rgba(0,0,0,.3) 0 1px,transparent 1px 3px);pointer-events:none}
+.th-og .ongoro-svg{position:absolute;left:50%;top:16%;height:125%;width:auto;transform:translateX(-50%);opacity:.6;-webkit-mask-image:linear-gradient(#000 50%,transparent 90%);mask-image:linear-gradient(#000 50%,transparent 90%)}

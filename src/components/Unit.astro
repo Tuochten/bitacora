@@ -1,0 +1,7 @@
+---
+// Tarjeta de proyecto: recibe una entrada con type "proyecto" (handoff/js/site.js, const unit).
+import { postHref } from '../lib/sitio.js';
+const { post } = Astro.props;
+---
+<a href={postHref(post)} class="unit"><div class="unit-top"><span class={post.project.state === 'activo' ? 'unit-state' : 'unit-state w'}><i aria-hidden="true"></i>{post.project.state}</span><span class="unit-year">{post.project.since}</span></div>
+<h3>{post.title}</h3><p>{post.description}</p><div class="st">{post.project.stack}</div></a>

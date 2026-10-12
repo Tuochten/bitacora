@@ -1,0 +1,54 @@
+---
+import site from '../data/site.json';
+import { byDate, isProj, postHref } from '../lib/sitio.js';
+
+const porDate = byDate(site.posts);
+const indice = [
+  ...site.nav.map((n) => ({ t: n.label, s: 'Página', h: n.href })),
+  ...porDate.map((p) => ({ t: p.title, s: (isProj(p) ? 'Proyecto · ' + (p.project?.stack || '') : 'Entrada · ' + (p.category || '')), h: postHref(p), k: [p.description, p.category, ...(p.tags || [])].join(' ') })),
+];
+---
+
+<div class="cmdk" hidden id="cmdk">
+<div class="cmdk-bg" data-close></div>
+
+<div aria-label="Buscar" aria-modal="true" class="cmdk-box" role="dialog">
+<div class="cmdk-in"><span aria-hidden="true">›</span><input aria-controls="cmdk-list" autocomplete="off" id="cmdk-q" placeholder="Buscar entradas, proyectos, páginas…" type="search"/><kbd data-close>Esc</kbd></div>
+
+<ul class="cmdk-list" id="cmdk-list" role="listbox"></ul>
+<div class="cmdk-foot"><span>↑↓ moverse</span><span>↵ abrir</span><span id="cmdk-n"></span></div></div></div>
+
+<script type="application/json" id="cmdk-data" set:html={JSON.stringify(indice)} />
+
+<script>
+import { buscar } from '../lib/buscar.js';
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const idx = JSON.parse(document.getElementById('cmdk-data').textContent);
+const box = document.getElementById('cmdk'), q = document.getElementById('cmdk-q'), list = document.getElementById('cmdk-list'), n = document.getElementById('cmdk-n');
+let res = [], sel = 0;
+function render(){
+  const v = q.value.trim();
+  res = v ? buscar(idx, v) : idx.filter(i => i.s !== "Página").slice(0, 6);
+  sel = Math.min(sel, Math.max(0, res.length - 1));
+  list.innerHTML = res.length ? res.map((r,i) => `<li role="option" aria-selected="${i===sel}"><a href="${r.h}"><b>${esc(r.t)}</b><span>${esc(r.s)}</span></a></li>`).join("")
+    : `<li class="none">Sin resultados para «${esc(q.value)}»</li>`;
+  n.textContent = v ? res.length + " resultados" : "Recientes";
+}
+const open = () => { box.hidden = false; q.value = ""; sel = 0; render(); q.focus(); document.documentElement.style.overflow = "hidden"; };
+const close = () => { box.hidden = true; document.documentElement.style.overflow = ""; };
+q.addEventListener("input", () => { sel = 0; render(); });
+q.addEventListener("keydown", e => {
+  if (e.key === "ArrowDown"){ e.preventDefault(); sel = Math.min(sel + 1, res.length - 1); render(); }
+  else if (e.key === "ArrowUp"){ e.preventDefault(); sel = Math.max(sel - 1, 0); render(); }
+  else if (e.key === "Enter" && res[sel]){ location.href = res[sel].h; }
+});
+box.addEventListener("click", e => { if (e.target.closest("[data-close]")) close(); });
+document.addEventListener("keydown", e => {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k"){ e.preventDefault(); box.hidden ? open() : close(); }
+  else if (e.key === "/" && box.hidden && !/input|textarea|select/i.test(document.activeElement.tagName)){ e.preventDefault(); open(); }
+  else if (e.key === "Escape" && !box.hidden) close();
+});
+document.querySelectorAll("[data-open-search]").forEach(b => b.addEventListener("click", open));
+window.openSearch = open;
+if (/Mac/.test(navigator.platform)) document.querySelector('.top .search kbd').textContent = '⌘K';
+</script>

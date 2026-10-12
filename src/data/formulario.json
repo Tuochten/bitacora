@@ -1,0 +1,4 @@
+{
+  "nota": "Clave pública (site key) del widget de Turnstile de wlaque.cl. La secreta va como secret TURNSTILE_SECRET del Worker, nunca aquí. Mientras diga la de prueba, el captcha pasa siempre en el navegador pero el Worker real lo rechaza. Ver PLAN-FORMULARIO.md.",
+  "turnstileSitekey": "0x4AAAAAAFU5wQS8v64OPi0Z"
+}

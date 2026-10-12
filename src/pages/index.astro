@@ -1,0 +1,132 @@
+---
+import Base from '../layouts/Base.astro';
+import '../styles/home.css';
+import site from '../data/site.json';
+import { mascotSVG } from '../lib/mascot-svg.js';
+import { ongoroSVG } from '../lib/ongoro.js';
+import { byDate, isProj, postHref, fmtDate, shortTitle } from '../lib/sitio.js';
+import Pin from '../components/Pin.astro';
+import Row from '../components/Row.astro';
+import Unit from '../components/Unit.astro';
+
+const title = "Wladimir Aqueveque H. — Profesional TI, ciberseguridad y desarrollo web | wlaque.cl";
+const description = "Wladimir Aqueveque H.: más de 13 años en soporte técnico, infraestructura y plataformas, y más de 150 proyectos web como freelance en Webflow, Shopify y WordPress. Notas sobre ciberseguridad y homelab.";
+const ogTitle = "Wladimir Aqueveque H. — wlaque.cl";
+const ogDescription = "Profesional TI · Ciberseguridad · WebDev · Estudiante de Ingeniería.";
+const jsonLD = {"@context":"https://schema.org","@type":"Person","name":"Wladimir Aqueveque H.","url":"https://wlaque.cl/","jobTitle":"Profesional TI","knowsAbout":["Ciberseguridad","Infraestructura TI","DNS","Hosting","WordPress","Webflow","Shopify"]};
+
+const destacado = site.posts.find((p) => p.featured);
+const todas = byDate(site.posts);
+const entradas = todas.filter((p) => !isProj(p));
+const proyectos = todas.filter((p) => isProj(p));
+const limite = site.settings.homeRecent;
+const enTodos = new Set(entradas.filter((p) => !p.featured).slice(0, limite).map((p) => p.slug));
+---
+
+<Base title={title} description={description} ogTitle={ogTitle} ogDescription={ogDescription} active="inicio">
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLD)} />
+  <main id="contenido">
+    <section aria-labelledby="nombre" class="head">
+      <div class="head-txt">
+        <h1 class="cursor" id="nombre">{site.profile.nameSplit[0]} <em>{site.profile.nameSplit[1]}</em></h1>
+        <p class="role">{site.profile.role}</p>
+        <p id="bio">{site.profile.bio}</p>
+      </div>
+      <a aria-label="Desarrollo web freelance" class="free" href={site.profile.freelance.href}>
+        <span class="free-k"><i aria-hidden="true"></i>{site.profile.freelance.label}</span>
+        <span class="free-n">{site.profile.freelance.projects}</span>
+        <span class="free-l">{site.profile.freelance.projectsLabel}</span>
+        {site.profile.freelance.stack.map(([nombre, texto]) => (
+          <span class="free-s"><b>{nombre}</b> {texto}</span>
+        ))}
+        <span class="free-x">{site.profile.freelance.extra}</span>
+        <span class="free-go">{site.profile.freelance.cta}</span>
+      </a>
+      <div aria-hidden="true" class="head-art" id="headart"><Fragment set:html={mascotSVG({ cls: 'mas' })} /><div class="scan"></div></div>
+    </section>
+    <section aria-label="Ahora mismo" class="status" id="status">
+      {site.now.map(item => (
+        <div class={item.tone}>
+          <span class="k">{item.label}</span>
+          <span class="v">{item.value}</span>
+          <span class="n">{item.note}</span>
+        </div>
+      ))}
+    </section>
+    <div class="grid">
+      <div class="col">
+        <div id="pin"><Pin post={destacado} /></div>
+        <section aria-labelledby="seclabel">
+          <div class="sec"><h2 id="seclabel">Entradas recientes</h2><span class="r"></span><a href="/blog/">Ver todas →</a></div>
+          <div class="log" id="log" data-x-limite={limite}>
+            {entradas.map((p) => <Row post={p} oculta={!enTodos.has(p.slug)} />)}
+            <div class="empty" hidden><Fragment set:html={ongoroSVG(56)} /><p></p></div>
+          </div>
+        </section>
+        <section aria-labelledby="h-proy" style="margin-top:40px">
+          <div class="sec"><h2 id="h-proy">Proyectos</h2><span class="r"></span><a href="/blog/proyectos/">Ver todos →</a></div>
+          <div class="units" id="units">{proyectos.slice(0, 4).map((p) => <Unit post={p} />)}</div>
+        </section>
+      </div>
+      <aside aria-label="Complementario">
+        <h2 class="side-h">Filtrar por tema</h2>
+        <div aria-label="Temas" class="filters" id="filters" role="group">
+          {site.tags.map(t => (
+            <button type="button" data-t={t} aria-pressed={t === 'Todos' ? 'true' : 'false'}>
+              {t === 'Todos' ? 'Todos' : '› ' + t}
+            </button>
+          ))}
+        </div>
+        <div id="skills">
+          {site.skills.map(g => (
+            <>
+              <h2 class="side-h">{g.group}</h2>
+              <ul>
+                {g.items.map(i => (
+                  <li class={i.primary ? 'pri' : ''}>{i.name}</li>
+                ))}
+              </ul>
+            </>
+          ))}
+        </div>
+        <div class="guard" id="guard"><Fragment set:html={ongoroSVG(52)} /><div class="cap">guardián · en vigilia</div></div>
+      </aside>
+    </div>
+  </main>
+  <script>
+    const botones = [...document.querySelectorAll('#filters button')];
+    const temas = botones.map((b) => b.dataset.t);
+    let activo = new URLSearchParams(location.search).get('tema') || 'Todos';
+    if (!temas.includes(activo)) activo = 'Todos';
+
+    function render() {
+      const todos = activo === 'Todos';
+      botones.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.t === activo)));
+      document.getElementById('pin').hidden = !todos;
+      document.getElementById('seclabel').textContent = todos ? 'Entradas recientes' : 'Tema: ' + activo;
+      const limite = Number(document.getElementById('log').dataset.xLimite);
+      let visibles = 0;
+      document.querySelectorAll('#log article.row').forEach((fila) => {
+        const candidata = todos ? fila.dataset.xDestacado !== 'si' : fila.dataset.xCat === activo;
+        const ver = candidata && visibles < limite;
+        fila.hidden = !ver;
+        if (ver) visibles++;
+      });
+      const vacio = document.querySelector('#log .empty');
+      vacio.hidden = visibles > 0;
+      vacio.querySelector('p').textContent = 'Aún no hay entradas de «' + activo + '».';
+    }
+
+    document.getElementById('filters').addEventListener('click', (e) => {
+      const b = e.target.closest('button');
+      if (!b) return;
+      activo = b.dataset.t;
+      render();
+      const u = new URL(location.href);
+      if (activo === 'Todos') u.searchParams.delete('tema'); else u.searchParams.set('tema', activo);
+      history.replaceState(null, '', u);
+    });
+
+    render();
+  </script>
+</Base>

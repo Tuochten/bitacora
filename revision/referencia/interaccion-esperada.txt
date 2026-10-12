@@ -1,0 +1,11 @@
+carga               cerrado |  | 0 ítems | seleccionado: -1 | primero: -
+Ctrl K              abierto | Recientes | 6 ítems | seleccionado: 0 | primero: wlaque.clProyecto · Astro · Markdown · Netlify
+escribe "pihole"    abierto | 2 resultados | 2 ítems | seleccionado: 0 | primero: Pi-hole + Nextcloud + VPN en Docker: mi stack personalEntrada · Homelab
+escribe "docker"    abierto | 2 resultados | 2 ítems | seleccionado: 0 | primero: Pi-hole + Nextcloud + VPN en Docker: mi stack personalEntrada · Homelab
+flecha abajo        abierto | 2 resultados | 2 ítems | seleccionado: 1 | primero: Pi-hole + Nextcloud + VPN en Docker: mi stack personalEntrada · Homelab
+Esc                 cerrado | Recientes | 6 ítems | seleccionado: 0 | primero: wlaque.clProyecto · Astro · Markdown · Netlify
+tecla "/"           abierto | Recientes | 6 ítems | seleccionado: 0 | primero: wlaque.clProyecto · Astro · Markdown · Netlify
+clic Homelab        destacado oculto | título: Tema: Homelab | url: ?tema=Homelab | filas: Homelab, Homelab, Homelab, Homelab
+clic Todos          destacado visible | título: Entradas recientes | url: (sin ?tema) | filas: Homelab, Ciberseguridad, Webflow, Dev, Astro
+390 px, carga       botón visible | aria-expanded=false | menú cerrado (none)
+390 px, clic Menú   botón visible | aria-expanded=true | menú abierto (flex)

@@ -1,0 +1,9 @@
+/* ajustes.css — cambios del dueño sobre el diseño, globales y cargados al final (2026-10-12).
+   bitacora.css viene del handoff: si llega uno nuevo, estos ajustes siguen aplicando sin tocarlo. */
+
+/* Más contraste en todo el sitio: cada tono de texto sube un escalón hacia el blanco (la letra mono delgada
+   sobre el oliva cansaba, aunque ya cumplía 4,5:1). --hi (títulos y negritas) no cambia: sigue siendo el más claro. */
+:root{--mid:#d6dcc4;--low:#b0ba98;--faint:#97a37c}
+
+/* Sobre mí: el rol ("… · Estudiante de Ingeniería.") cabe en una línea; el 62ch del diseño dejaba "Ingeniería." sola */
+.intro .lede{max-width:none;text-wrap:balance}

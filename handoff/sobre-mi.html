@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sobre mí — Wladimir Aqueveque H. | wlaque.cl</title>
+<meta name="description" content="Profesional TI con más de 13 años en soporte, desarrollo web y plataformas. Estudiante de Ingeniería en Ciberseguridad y Auditoría (USS), preparando CompTIA Security+.">
+<link rel="canonical" href="https://wlaque.cl/sobre-mi/">
+<meta property="og:type" content="profile"><meta property="og:site_name" content="wlaque.cl"><meta property="og:locale" content="es_CL"><meta property="og:title" content="Sobre mí y contacto — Wladimir Aqueveque H. | wlaque.cl"><meta property="og:url" content="https://wlaque.cl/sobre-mi/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1b1e14"><link rel="icon" href="assets/avatar-face.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="bitacora.css">
+<link rel="stylesheet" href="prosa.css">
+<link rel="stylesheet" href="interior.css">
+</head>
+<body>
+<div class="shell">
+<div id="site-top"></div>
+<main id="contenido">
+<header class="phead">
+<nav class="crumbs" aria-label="Ruta"><a href="index.html">Inicio</a><span aria-hidden="true">›</span><span aria-current="page">Sobre mí</span></nav>
+<div class="intro">
+<img src="assets/avatar-face.png" alt="Wladimir Aqueveque H." width="132" height="132">
+<div><h1 class="cursor">Wladimir Aqueveque H.</h1><p class="lede">Profesional TI · Ciberseguridad · WebDev · Estudiante de Ingeniería.</p></div>
+</div>
+</header>
+<div class="about">
+<div class="prose" id="about"></div>
+<aside class="about-side" aria-label="Resumen">
+<h2 class="side-h">Ahora mismo</h2>
+<div class="now stack" id="now"></div>
+<h2 class="side-h">Idiomas</h2>
+<ul id="langs"></ul>
+<div class="share" id="links"></div>
+</aside>
+</div>
+<section class="blk" aria-labelledby="h-curso">
+<div class="sec"><h2 id="h-curso">En curso</h2><span class="r"></span></div>
+<div class="ip" id="ip"></div>
+</section>
+<section class="blk" aria-labelledby="h-form">
+<div class="cols2">
+<div><div class="sec"><h2 id="h-form">Formación</h2><span class="r"></span></div><ol class="tl" id="edu"></ol></div>
+<div><div class="sec"><h2 id="h-cap">Capacitaciones</h2><span class="r"></span></div><ol class="tl" id="train"></ol></div>
+</div>
+</section>
+<section class="blk" aria-labelledby="h-hab">
+<div class="sec"><h2 id="h-hab">Habilidades y herramientas</h2><span class="r"></span></div>
+<div class="tools" id="tools"></div>
+<div class="extra"><div><h3 class="side-h">Atributos</h3><div class="chips" id="attrs"></div></div><div><h3 class="side-h">Homelab</h3><div class="chips" id="lab"></div></div></div>
+</section>
+<section class="blk" aria-label="Contacto">
+<div class="cta"><div><b>¿Conversamos?</b><p id="cta-p"></p></div><a class="btn" href="contacto.html">Ir a contacto →</a></div>
+</section>
+</main>
+<div id="site-foot"></div>
+</div>
+<script src="js/ongoro.js"></script>
+<script src="js/site.js"></script>
+<script>
+Site.load().then(D => {
+const esc = Site.esc, P = D.profile;
+Site.mount("sobre");
+document.getElementById("about").innerHTML = '<h2 id="sobre">Sobre mí</h2>' + P.about.map((t,i) => `<p${i===0 ? ' class="lead"' : ""}>${esc(t)}</p>`).join("");
+document.getElementById("now").innerHTML = D.now.map(a => `<div class="${a.tone}"><span class="k">${a.label}</span><span class="v">${esc(a.value)}</span><span class="n">${esc(a.note)}</span></div>`).join("");
+document.getElementById("langs").innerHTML = D.languages.map(l => `<li class="pri">${l.name} — ${l.level}${l.note ? " (" + l.note + ")" : ""}</li>`).join("");
+document.getElementById("links").innerHTML = `<a href="${P.linkedin}" rel="me">LinkedIn</a><a href="contacto.html">Contacto</a>`;
+document.getElementById("ip").innerHTML = D.inProgress.map(x => `<article><div class="k">${x.kind}<span>${x.when}</span></div><h3>${esc(x.title)}</h3><p class="o">${esc(x.org)}</p><p class="d">${esc(x.detail)}</p></article>`).join("");
+const tl = l => l.map(x => `<li${/curso/i.test(x.when + x.note) ? ' class="cur"' : ""}><span class="w">${x.when}</span><b>${esc(x.title)}</b><span class="o">${esc(x.org)}</span>${x.note ? '<span class="x">' + esc(x.note) + "</span>" : ""}</li>`).join("");
+document.getElementById("edu").innerHTML = tl(D.education);
+document.getElementById("train").innerHTML = tl(D.training);
+document.getElementById("tools").innerHTML = D.tools.map(g => `<div><h3 class="side-h">${g.group}</h3><div class="chips">${g.items.map(i => '<span class="chip">' + esc(i) + "</span>").join("")}</div></div>`).join("");
+document.getElementById("attrs").innerHTML = D.attributes.map(a => '<span class="chip">' + esc(a) + "</span>").join("");
+document.getElementById("lab").innerHTML = ["Docker","Pi-hole","restic","Tailscale","llama.cpp","Open WebUI"].map(a => '<span class="chip">' + a + "</span>").join("");
+document.getElementById("cta-p").textContent = "Proyectos web, trabajo o consultas de infraestructura y seguridad. Respondo en " + D.contact.response + ".";
+}).catch(Site.fail);
+</script>
+</body>
+</html>

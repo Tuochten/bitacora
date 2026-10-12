@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contacto — Wladimir Aqueveque H. | wlaque.cl</title>
+<meta name="description" content="Escríbeme por proyectos web en Webflow o Shopify, trabajo o consultas de infraestructura y seguridad.">
+<link rel="canonical" href="https://wlaque.cl/contacto/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="wlaque.cl"><meta property="og:locale" content="es_CL"><meta property="og:title" content="Sobre mí y contacto — Wladimir Aqueveque H. | wlaque.cl"><meta property="og:url" content="https://wlaque.cl/contacto/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1b1e14"><link rel="icon" href="assets/avatar-face.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="bitacora.css">
+<link rel="stylesheet" href="prosa.css">
+<link rel="stylesheet" href="interior.css">
+</head>
+<body>
+<div class="shell">
+<div id="site-top"></div>
+<main id="contenido">
+<header class="phead">
+<nav class="crumbs" aria-label="Ruta"><a href="index.html">Inicio</a><span aria-hidden="true">›</span><span aria-current="page">Contacto</span></nav>
+<h1 class="cursor">Contacto</h1>
+<p class="lede">Proyectos web en Webflow o Shopify, trabajo o consultas de infraestructura y seguridad.</p>
+</header>
+<div class="contact">
+<div>
+<form class="win wide" id="form" novalidate aria-labelledby="win-t">
+<div class="win-bar"><span id="win-t">Nuevo mensaje — wlaque.cl</span><span class="x" aria-hidden="true">×</span></div>
+<div class="win-body">
+<label class="fld">Nombre<input name="nombre" autocomplete="name" required></label>
+<label class="fld">Email<input name="email" type="email" autocomplete="email" inputmode="email" required></label>
+<label class="fld">Mensaje<textarea name="mensaje" required></textarea></label>
+</div>
+<div class="win-foot"><span class="win-status" id="status" role="status">Se abrirá tu programa de correo.</span><button class="btn3d" type="reset">Limpiar</button><button class="btn3d pri" type="submit">Enviar</button></div>
+</form>
+</div>
+<div class="c-side" aria-label="Otras formas de contacto">
+<a class="ccard li" id="li" rel="me"><span class="k">LinkedIn</span><span class="v">/in/wladimir-aqueveque</span><span class="go">Ver perfil →</span></a>
+<div class="ccard"><span class="k">Email</span><div class="line"><span class="v" id="mail"></span><button class="mini" type="button" id="copy">Copiar</button></div></div>
+<a class="ccard" id="cal"><span class="k">Agenda</span><span class="v">Llamada de 20 minutos</span><span class="s">Elige un horario disponible en mi calendario.</span><span class="go">Reservar →</span></a>
+<div class="ccard"><span class="k">Hora local</span><span class="v" id="clock">Santiago</span><span class="s" id="resp"></span></div>
+<div class="ccard"><span class="k">Clave PGP</span><span class="fp" id="fp"></span><div class="line"><span class="s">Para mensajes cifrados.</span><a class="mini" id="pgp" download>Descargar .asc</a></div></div>
+</div>
+</div>
+</main>
+<div id="site-foot"></div>
+</div>
+<script src="js/ongoro.js"></script>
+<script src="js/site.js"></script>
+<script>
+Site.load().then(D => {
+const P = D.profile, C = D.contact;
+Site.mount("contacto");
+document.getElementById("li").href = P.linkedin;
+document.getElementById("mail").textContent = P.email;
+document.getElementById("cal").href = C.calendar;
+document.getElementById("fp").textContent = C.pgp.fingerprint;
+document.getElementById("pgp").href = C.pgp.href;
+document.getElementById("resp").textContent = "Respondo en " + C.response + ".";
+document.getElementById("copy").addEventListener("click", e => {
+  navigator.clipboard && navigator.clipboard.writeText(P.email).catch(()=>{});
+  e.target.textContent = "Copiado"; setTimeout(() => e.target.textContent = "Copiar", 1400);
+});
+// Hora de Santiago y si está dentro del horario (9–19 h).
+const clock = document.getElementById("clock");
+function tick(){
+  const now = new Date(), t = now.toLocaleTimeString("es-CL", {timeZone:C.timezone, hour:"2-digit", minute:"2-digit", hourCycle:"h23"});
+  const h = +now.toLocaleString("en-US", {timeZone:C.timezone, hour:"numeric", hour12:false}), on = h >= C.hours[0] && h < C.hours[1];
+  clock.innerHTML = `<span class="dot${on ? "" : " off"}" aria-hidden="true"></span>Santiago ${t} · ${on ? "en horario" : "fuera de horario"}`;
+}
+tick(); setInterval(tick, 20000);
+// Envío por mailto
+const form = document.getElementById("form"), status = document.getElementById("status");
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  let bad = null;
+  form.querySelectorAll("input,textarea").forEach(f => { const ok = f.checkValidity(); f.setAttribute("aria-invalid", !ok); if (!ok && !bad) bad = f; });
+  if (bad){ status.className = "win-status bad"; status.textContent = bad.type==="email" && bad.value ? "Revisa el email." : "Completa los tres campos."; bad.focus(); return; }
+  const v = Object.fromEntries(new FormData(form));
+  location.href = "mailto:" + P.email + "?subject=" + encodeURIComponent("Contacto desde wlaque.cl — " + v.nombre) + "&body=" + encodeURIComponent(v.mensaje + "\n\n— " + v.nombre + " <" + v.email + ">");
+  status.className = "win-status ok"; status.textContent = "Se abrió tu correo. Si no pasó nada, escríbeme a " + P.email + ".";
+});
+form.addEventListener("reset", () => { form.querySelectorAll("[aria-invalid]").forEach(f => f.removeAttribute("aria-invalid")); status.className = "win-status"; status.textContent = "Se abrirá tu programa de correo."; });
+}).catch(Site.fail);
+</script>
+</body>
+</html>

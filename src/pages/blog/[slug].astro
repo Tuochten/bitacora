@@ -1,0 +1,163 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Row from '../../components/Row.astro';
+import HtmlContent from '../../components/HtmlContent.astro';
+import { ongoroSVG } from '../../lib/ongoro.js';
+import { byDate, isProj, postHref, fmtDate, shortTitle, temaUrl } from '../../lib/sitio.js';
+import site from '../../data/site.json';
+import '../../styles/prosa.css';
+import '../../styles/prosa-extra.css';
+
+export async function getStaticPaths() {
+  const md = await getCollection('blog');
+  return site.posts.map((p) => ({ params: { slug: p.slug }, props: { p, entrada: md.find((e) => e.id === p.slug) } }));
+}
+
+const { p, entrada } = Astro.props;
+const L = byDate(site.posts);
+const i = L.findIndex((x) => x.slug === p.slug);
+const P = p.type === 'proyecto' ? p.project : null;
+const older = L[i + 1];
+const newer = L[i - 1];
+
+let relacionadas = L.filter((x) => x !== p && x.category === p.category);
+L.forEach((x) => { if (relacionadas.length < 2 && x !== p && !relacionadas.includes(x)) relacionadas.push(x); });
+
+const { Content, headings } = entrada ? await render(entrada) : { Content: null, headings: [] };
+const hasMarkdown = entrada && entrada.body;
+
+const title = shortTitle(p, 60) + ' | wlaque.cl';
+const description = p.description;
+const canonical = 'https://wlaque.cl' + postHref(p);
+
+let sideTocHidden = false;
+let tocItems = [];
+if (hasMarkdown) {
+  const h2s = headings.filter((h) => h.depth === 2);
+  if (!h2s.length) sideTocHidden = true;
+  tocItems = h2s.map((h, idx) => {
+    const text = h.text.replace(/^\d{2}/, '');
+    const num = String(idx + 1).padStart(2, '0');
+    return { slug: h.slug, text, num, on: idx === 0 };
+  });
+} else if (P && p.body && p.body.length > 0) {
+  tocItems = [{ slug: 'resumen', text: 'Resumen', num: '01', on: true }];
+}
+
+sideTocHidden = tocItems.length === 0;
+const catsClass = 'cat ' + p.category;
+const catsText = [P ? 'Proyecto' : '', p.category, ...p.tags].filter(Boolean).join(' · ');
+
+const hasBodyContent = P && p.body && p.body.length > 0;
+const bodyHtml = hasBodyContent 
+  ? `<p class="lead">${p.description}</p><h2 id="resumen">Resumen</h2>${p.body.map((parrafo) => `<p>${parrafo}</p>`).join('')}`
+  : `<p class="lead">${p.description}</p><div class="note" role="note"><span class="k">Prototipo</span>El cuerpo de esta entrada no está en el prototipo. En producción sale de su archivo Markdown.</div>`;
+
+const shareUrl = encodeURIComponent('https://wlaque.cl' + postHref(p));
+---
+
+<Base active="blog" title={title} description={description} canonical={canonical}>
+  <div class="readbar" aria-hidden="true"><i id="readfill" style="width: 0%;"></i></div>
+  <main id="contenido">
+    <article>
+
+      <header class="phead">
+
+        <nav aria-label="Ruta" class="crumbs">
+          <a href="/">Inicio</a><span aria-hidden="true">›</span>
+          <a href="/blog/">Blog</a><span aria-hidden="true">›</span>
+          {P && <><a href="/blog/proyectos/">Proyectos</a><span aria-hidden="true">›</span></>}
+          <span aria-current="page" id="crumb-last">{shortTitle(p)}</span>
+        </nav>
+
+        <div class={catsClass} id="cats">{catsText}</div>
+
+        <div class="meta"><span>Wladimir Aqueveque H.</span><time datetime={p.date} id="date">{fmtDate(p.date)}</time><span id="read">{p.readingTime} de lectura</span></div>
+      </header>
+
+      {/* Siempre la portada de terminal: la foto de portada (cover) se usa en las miniaturas del listado y del destacado, para que la entrada no empiece más abajo (2026-09-30) */}
+      {/* El título va una sola vez, en la portada (2026-10-12, pedido del dueño: el de la cabecera lo repetía) */}
+      <div class="cover-term"><span aria-hidden="true"><Fragment set:html={ongoroSVG(120)} /></span><span aria-hidden="true" class={catsClass}>{p.category}</span><span aria-hidden="true" class="p">~/{P ? "proyectos" : "blog/" + p.category.toLowerCase()}/</span><h1 class:list={['t', 'cursor', { largo: p.title.length > 34 }]} id="h1">{p.title}</h1></div>
+
+      <div class="grid">
+
+        <div class="col">
+
+          {hasMarkdown ? (
+            <div class="prose" id="prose"><Content /></div>
+          ) : (
+            <div class="prose" id="prose"><HtmlContent content={bodyHtml} /></div>
+          )}
+
+          <nav aria-label="Entradas" class="pager" id="pager">
+            {older ? <a href={postHref(older)} rel="prev"><span>← Anterior</span>{older.title}</a> : <span class="pager-x" aria-hidden="true"></span>}
+            {newer ? <a href={postHref(newer)} rel="next"><span>Siguiente →</span>{newer.title}</a> : <span class="pager-x" aria-hidden="true"></span>}
+          </nav>
+
+          <section aria-labelledby="h-rel" class="sec-gap">
+
+            <div class="sec"><h2 id="h-rel">Relacionadas</h2><span class="r"></span></div>
+
+            <div class="log" id="rel">
+              {relacionadas.slice(0, 2).map((r) => <Row post={r} />)}
+            </div>
+          </section>
+        </div>
+
+        <aside aria-label="En esta entrada">
+
+          <div class="sticky">
+
+            <div class="side-toc" id="side-toc" hidden={sideTocHidden}>
+              <h2 class="side-h">En esta entrada</h2>
+              <ol class="toc" id="toc">
+                {tocItems.map((item) => <li><a class={item.on ? 'on' : undefined} href={'#' + item.slug}><span class="n">{item.num}</span>{item.text}</a></li>)}
+              </ol>
+            </div>
+
+            <div hidden={!P} id="projbox"><h2 class="side-h">Proyecto</h2><dl class="facts" id="pfacts">{P ? [<><dt>Estado</dt><dd>{P.state}</dd><dt>Desde</dt><dd>{P.since.replace(/\s*→/, '')}</dd><dt>Tipo</dt><dd>{P.kind}</dd><dt>Stack</dt><dd>{P.stack}</dd></>] : []}</dl></div>
+
+            <h2 class="side-h">Detalles</h2>
+
+            <dl class="facts" id="facts">
+              <dt>{P ? 'Actualizado' : 'Publicado'}</dt><dd>{fmtDate(p.date)}</dd>
+              <dt>Lectura</dt><dd>{p.readingTime}</dd>
+              <dt>Tema</dt><dd><a href={'/blog/tema/' + temaUrl(p.category) + '/'}>{p.category}</a></dd>
+            </dl>
+
+            <h2 class="side-h">Compartir</h2>
+
+            <div class="share"><a href={'https://www.linkedin.com/sharing/share-offsite/?url=' + shareUrl} id="sh-li">LinkedIn</a><a href={'https://x.com/intent/post?url=' + shareUrl + '&text=' + encodeURIComponent(p.title)} id="sh-x">X</a><button id="copylink" type="button">Copiar enlace</button></div>
+          </div>
+        </aside>
+      </div>
+    </article>
+  </main>
+</Base>
+
+<script>
+  // Índice activo, barra de lectura y botón de copiar enlace (handoff/post.html, líneas 133-151).
+  // El bloque de código no lleva botón Copiar: lo sacó el dueño el 2026-09-30.
+  // El índice ya viene armado desde el build: aquí solo se marca el ítem activo.
+  const prose = document.getElementById('prose');
+  const heads = [...prose.querySelectorAll('h2')];
+  const links = [...document.querySelectorAll('#toc a')];
+  const fill = document.getElementById('readfill');
+
+  function onScroll() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    fill.style.width = (max > 0 ? (scrollY / max) * 100 : 0) + '%';
+    let k = 0;
+    heads.forEach((h, j) => { if (h.getBoundingClientRect().top < 140) k = j; });
+    links.forEach((a, j) => a.classList.toggle('on', j === k));
+  }
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  document.getElementById('copylink').addEventListener('click', (e) => {
+    navigator.clipboard?.writeText(location.href).catch(() => {});
+    e.target.textContent = 'Enlace copiado';
+    setTimeout(() => (e.target.textContent = 'Copiar enlace'), 1400);
+  });
+</script>

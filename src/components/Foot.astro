@@ -1,0 +1,8 @@
+---
+import site from '../data/site.json';
+const year = new Date().getFullYear();
+---
+
+<footer class="foot">
+<nav aria-label="Redes">{site.social.map(s => <a href={s.href} rel={s.label !== 'RSS' ? 'me' : undefined}>{s.label}</a>)}</nav>
+<div>© {year} wlaque.cl — hecho con Astro</div></footer>

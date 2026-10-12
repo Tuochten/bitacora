@@ -1,0 +1,37 @@
+---
+import { fmtDate, postHref } from '../lib/sitio.js';
+import { portada } from '../lib/portada.js';
+import { ongoroSVG } from '../lib/ongoro.js';
+
+type Props = {
+  post: {
+    id?: string;
+    slug?: string;
+    category?: string;
+    date?: Date | string;
+    title: string;
+    description: string;
+    readingTime?: string;
+    cover?: string;
+  };
+};
+
+const { post }: Props = Astro.props;
+
+const postHrefValue = postHref(post);
+const dateValue = post.date ? fmtDate(post.date) : '';
+const categoryValue = post.category || '';
+const foto = portada(post);
+---
+
+<article class="pin">
+<div>
+<div class="l">{categoryValue} · <time datetime={post.date ? post.date.split('T')[0] : ''}>{dateValue}</time></div>
+
+<h2><a href={postHrefValue}>{post.title}</a></h2>
+<p>{post.description}</p>
+<div class="m"><span>{post.readingTime || '3'} de lectura</span><a href={postHrefValue}>Leer →</a></div></div>
+
+{foto
+  ? <img alt="" class="pin-th" src={foto} width="240" height="150" decoding="async">
+  : <div aria-hidden="true" class="pin-th th-og"><Fragment set:html={ongoroSVG(100)} /></div>}</article>

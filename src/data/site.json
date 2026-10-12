@@ -1,0 +1,526 @@
+{
+  "version": "2.1.0",
+  "date": "2026-09-29",
+  "profile": {
+    "name": "Wladimir Aqueveque H.",
+    "nameSplit": [
+      "Wladimir",
+      "Aqueveque H."
+    ],
+    "handle": "~/web-personal",
+    "role": "Profesional TI · Ciberseguridad · WebDev · Estudiante de Ingeniería.",
+    "bio": "Profesional TI con más de 13 años de experiencia en soporte técnico, infraestructura y administración de plataformas (Windows, macOS y Linux, Google Workspace, DNS, DHCP y hosting), liderando equipos técnicos. Actualmente enfocado en ciberseguridad y TI corporativo, integrando experiencia práctica en infraestructura, sitios web, atención a usuarios y resolución de incidentes con una visión orientada a la protección de activos tecnológicos.",
+    "freelance": {
+      "label": "Freelance web",
+      "projects": "+150",
+      "projectsLabel": "proyectos web",
+      "stack": [
+        [
+          "Webflow",
+          "sitios informativos"
+        ],
+        [
+          "Shopify",
+          "e-commerce"
+        ]
+      ],
+      "extra": "y rescates de WordPress",
+      "cta": "Contáctame →",
+      "href": "/desarrollo-web/"
+    },
+    "email": "contacto@wlaque.cl",
+    "linkedin": "https://www.linkedin.com/in/wladimir-aqueveque",
+    "about": [
+      "Profesional TI con más de 13 años de experiencia en soporte técnico, desarrollo web y administración de plataformas (hosting, DNS, correos), con más de 100 proyectos WordPress y WooCommerce implementados.",
+      "Actualmente Desarrollador Web / Líder Técnico en agencia digital: lidero el equipo de programación y el área de soporte, e impulso la integración de IA en los procesos de desarrollo con Claude Code (agentes, MCP) sobre Webflow y Shopify.",
+      "En formación continua en ciberseguridad: Diplomado en Ciberseguridad (UDD, 2024), Ingeniería en Ciberseguridad y Auditoría en curso (USS) y preparación de la certificación CompTIA Security+.",
+      "Fuera del trabajo administro un homelab Linux: Docker, DNS con Pi-hole, respaldos restic y acceso por Tailscale, IA local autoalojada (llama.cpp, Open WebUI) y laboratorios de pentesting KVM/QEMU."
+    ]
+  },
+  "now": [
+    {
+      "tone": "",
+      "label": "Estudiando",
+      "value": "Ingeniería en Ciberseguridad y Auditoría",
+      "note": "Universidad San Sebastián · 2026 →"
+    },
+    {
+      "tone": "plum",
+      "label": "Preparando",
+      "value": "CompTIA Security+ (SY0-701)",
+      "note": "Examen durante 2026"
+    },
+    {
+      "tone": "sage",
+      "label": "Trabajando",
+      "value": "Desarrollador Web / Líder Técnico",
+      "note": "Bigbuda · 2019 →"
+    }
+  ],
+  "skills": [
+    {
+      "group": "Día a día",
+      "items": [
+        {
+          "name": "Webflow y Shopify",
+          "primary": true
+        },
+        {
+          "name": "Claude Code (agentes, MCP)",
+          "primary": true
+        },
+        {
+          "name": "DNS, hosting y correos",
+          "primary": true
+        },
+        {
+          "name": "WordPress y WooCommerce",
+          "primary": false
+        }
+      ]
+    },
+    {
+      "group": "Homelab",
+      "items": [
+        {
+          "name": "Docker y Pi-hole",
+          "primary": false
+        },
+        {
+          "name": "restic y Tailscale",
+          "primary": false
+        },
+        {
+          "name": "llama.cpp y Open WebUI",
+          "primary": false
+        }
+      ]
+    },
+    {
+      "group": "Seguridad",
+      "items": [
+        {
+          "name": "Kali Linux y Metasploit",
+          "primary": false
+        },
+        {
+          "name": "Burp Suite y Wireshark",
+          "primary": false
+        },
+        {
+          "name": "NIST CSF",
+          "primary": false
+        }
+      ]
+    }
+  ],
+  "tags": [
+    "Todos",
+    "Dev",
+    "Ciberseguridad",
+    "Homelab",
+    "Webflow",
+    "Astro"
+  ],
+  "posts": [
+    {
+      "slug": "migrar-ordenes-woocommerce",
+      "category": "Dev",
+      "featured": false,
+      "title": "Migrar órdenes WooCommerce entre ambientes sin morir en el intento",
+      "shortTitle": "Migrar órdenes WooCommerce",
+      "description": "Cómo migrar pedidos de producción a QA usando SQL directo y phpMyAdmin, sin romper nada en el camino.",
+      "date": "2025-04-20",
+      "readingTime": "8 min",
+      "cover": null,
+      "tags": [
+        "WooCommerce",
+        "SQL"
+      ],
+      "type": "entrada"
+    },
+    {
+      "slug": "recomprimir-video-familiar-ffmpeg",
+      "category": "Homelab",
+      "featured": true,
+      "title": "Recomprimir 27 horas de video familiar con ffmpeg (y todo lo que la receta popular hace mal)",
+      "shortTitle": "27 horas de video con ffmpeg",
+      "description": "55 GiB de cintas digitalizadas quedaron en 32 GiB sin pérdida visible. Por el camino, cuatro de cinco decisiones salieron al revés de lo que recomienda todo el mundo.",
+      "date": "2026-09-18",
+      "readingTime": "8 min",
+      "cover": "/blog/recomprimir-video-familiar-ffmpeg/portada.webp",
+      "tags": [
+        "ffmpeg",
+        "Video",
+        "GPU"
+      ],
+      "type": "entrada"
+    },
+    {
+      "slug": "pihole-no-le-servia-dns-a-nadie",
+      "category": "Homelab",
+      "featured": false,
+      "title": "Mi Pi-hole llevaba meses sin servirle DNS a nadie (y decía estar healthy)",
+      "shortTitle": "Pi-hole sin servir DNS",
+      "description": "Fui a revisar por qué Nextcloud no sincronizaba y terminé descubriendo un Pi-hole sin puertos, el puerto 53 tomado por systemd-resolved y unos respaldos que casi quedan guardando carpetas vacías.",
+      "date": "2026-09-26",
+      "readingTime": "3 min",
+      "cover": "/blog/pihole-no-le-servia-dns-a-nadie/portada.webp",
+      "tags": [
+        "Pi-hole",
+        "DNS",
+        "Docker",
+        "Tailscale"
+      ],
+      "type": "entrada"
+    },
+    {
+      "slug": "btrfs-sin-espacio-con-espacio-libre",
+      "category": "Homelab",
+      "featured": false,
+      "title": "btrfs dice que no hay espacio, pero df dice que sí: qué está pasando",
+      "shortTitle": "btrfs sin espacio",
+      "description": "Mi disco del sistema llegó a tener 1 GiB sin asignar mientras df mostraba cientos libres. Por qué pasa en btrfs, qué número mirar y cómo dejar que el kernel lo resuelva solo.",
+      "date": "2026-09-17",
+      "readingTime": "5 min",
+      "cover": "/blog/btrfs-sin-espacio-con-espacio-libre/portada.webp",
+      "tags": [
+        "btrfs",
+        "Linux",
+        "CachyOS"
+      ],
+      "type": "entrada"
+    },
+    {
+      "slug": "wlaque-cl",
+      "type": "proyecto",
+      "category": "Astro",
+      "featured": false,
+      "title": "wlaque.cl",
+      "description": "Lo diseñé en Claude Design y lo construyó un equipo raro: Claude Code de jefe de obra y un modelo que corre en mi propia GPU de desarrollador. Yo puse la pregunta, las reglas y la última palabra.",
+      "date": "2026-10-12",
+      "readingTime": "7 min",
+      "cover": null,
+      "tags": [
+        "Claude Code",
+        "OpenCode",
+        "Cloudflare"
+      ],
+      "project": {
+        "state": "en línea",
+        "since": "2026 →",
+        "stack": "Astro · Cloudflare Workers · Claude Code · OpenCode",
+        "kind": "Personal"
+      }
+    },
+    {
+      "slug": "laboratorio-pentesting",
+      "type": "proyecto",
+      "category": "Ciberseguridad",
+      "featured": false,
+      "title": "Laboratorio de pentesting",
+      "description": "Laboratorio KVM en mi desktop: Kali contra máquinas vulnerables en una red aislada, sin salida a internet ni a mi casa.",
+      "date": "2026-09-19",
+      "readingTime": "2 min",
+      "cover": null,
+      "tags": [],
+      "project": {
+        "state": "en curso",
+        "since": "2026 →",
+        "stack": "KVM · libvirt · Kali · Metasploitable 2",
+        "kind": "Estudio"
+      },
+      "body": [
+        "Máquinas virtuales con KVM y libvirt en mi desktop: Kali Linux como estación de ataque y Metasploitable 2 como primer blanco. Los blancos viven en una red aislada, sin salida a internet ni a la red de mi casa, y Metasploitable vuelve a un snapshot limpio después de cada práctica. Ya hay una tercera VM preparada para las aplicaciones web vulnerables (DVWA, Juice Shop y WebGoat), que es lo siguiente que instalo.",
+        "Antes de instalar revisé los choques con lo que ya corría en el equipo: el firewall bloqueaba la red de las VMs, y Docker se salta ufw cuando publica puertos, así que las aplicaciones vulnerables van en su propia VM y no en contenedores del desktop.",
+        "El reconocimiento lo vengo practicando desde el taller de hacking ético: OSINT con Google dorks, Shodan, theHarvester, Maltego y Recon-ng, y escaneo con Nmap. Lo que sigue es explotar los blancos y publicar cada sesión como writeup en este blog."
+      ]
+    },
+    {
+      "slug": "homelab-linux",
+      "type": "proyecto",
+      "category": "Homelab",
+      "featured": false,
+      "title": "Homelab Linux",
+      "description": "Notebook con Ubuntu Server en mi casa: Docker, Pi-hole como DNS de todos mis equipos, respaldos con restic y acceso remoto por Tailscale.",
+      "date": "2026-07-02",
+      "readingTime": "3 min",
+      "cover": null,
+      "tags": [],
+      "project": {
+        "state": "activo",
+        "since": "2024 →",
+        "stack": "Ubuntu Server · Docker · Pi-hole · restic · Tailscale",
+        "kind": "Personal"
+      },
+      "body": [
+        "Un notebook con Ubuntu Server en la red de mi casa, con Docker: Pi-hole como DNS (también de mis equipos fuera de la casa, por Tailscale), Nextcloud, Jellyfin y Nginx Proxy Manager. Los datos de los contenedores se respaldan con restic hacia un disco de mi desktop.",
+        "La IA local vive en el desktop, que es el que tiene la GPU: llama.cpp y Open WebUI, al alcance de todos mis equipos por Tailscale.",
+        "Existe para probar en casa lo que después toco en el trabajo: cambios de DNS, respaldos y actualizaciones. Si algo se rompe acá, el único afectado soy yo."
+      ]
+    },
+    {
+      "slug": "utilidades-woocommerce",
+      "type": "proyecto",
+      "category": "Dev",
+      "featured": false,
+      "title": "Utilidades WooCommerce",
+      "description": "Scripts internos para migrar órdenes, importar catálogos y reparar metadatos entre ambientes.",
+      "date": "2025-11-10",
+      "readingTime": "3 min",
+      "cover": null,
+      "tags": [],
+      "project": {
+        "state": "activo",
+        "since": "2013 →",
+        "stack": "PHP · SQL · WP-CLI",
+        "kind": "Trabajo"
+      },
+      "body": [
+        "Scripts internos para tareas repetitivas de WooCommerce: migrar órdenes entre ambientes, importar catálogos y reparar metadatos.",
+        "Nacieron de problemas reales en producción y se fueron ordenando hasta quedar como una caja de herramientas reutilizable."
+      ]
+    }
+  ],
+  "nav": [
+    {
+      "id": "inicio",
+      "label": "Inicio",
+      "href": "/"
+    },
+    {
+      "id": "blog",
+      "label": "Blog",
+      "href": "/blog/"
+    },
+    {
+      "id": "web",
+      "label": "Desarrollo web",
+      "href": "/desarrollo-web/"
+    },
+    {
+      "id": "sobre",
+      "label": "Sobre mí",
+      "href": "/sobre-mi/"
+    },
+    {
+      "id": "contacto",
+      "label": "Contacto",
+      "href": "/contacto/"
+    }
+  ],
+  "social": [
+    {
+      "label": "GitHub",
+      "href": "https://github.com/Tuochten"
+    },
+    {
+      "label": "LinkedIn",
+      "href": "https://www.linkedin.com/in/wladimir-aqueveque"
+    }
+  ],
+  "settings": {
+    "postsPerPage": 8,
+    "homeRecent": 5,
+    "shortTitleMax": 42
+  },
+  "webdev": {
+    "lede": "Sitios en Webflow y tiendas en Shopify, con el dominio, el DNS y el correo bien configurados desde el primer día.",
+    "services": [
+      {
+        "platform": "Webflow",
+        "title": "Sitio informativo",
+        "tier": "principal",
+        "description": "Sitios corporativos, landing pages y portafolios que puedes editar sin tocar código.",
+        "includes": "Diseño · CMS · SEO base · Formularios"
+      },
+      {
+        "platform": "Shopify",
+        "title": "Tienda online",
+        "tier": "principal",
+        "description": "Tiendas nuevas o migradas, con catálogo, pagos y envíos configurados.",
+        "includes": "Tema · Catálogo · Pagos · Envíos"
+      },
+      {
+        "platform": "WordPress",
+        "title": "Rescate o migración",
+        "tier": "secundario",
+        "description": "Sitios desatendidos: actualización, limpieza y seguridad, o migración a otra plataforma.",
+        "includes": "Auditoría · Actualización · Migración"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Conversación",
+        "text": "Una llamada corta para entender qué necesitas y qué ya tienes."
+      },
+      {
+        "title": "Propuesta",
+        "text": "Alcance, plazos y valor por escrito."
+      },
+      {
+        "title": "Construcción",
+        "text": "Avances revisables en un sitio de prueba."
+      },
+      {
+        "title": "Entrega",
+        "text": "Publicación, capacitación de uso y accesos documentados."
+      }
+    ],
+    "included": [
+      "Dominio y DNS configurados",
+      "Correo con SPF, DKIM y DMARC",
+      "Certificado SSL",
+      "Respaldo inicial y accesos documentados"
+    ],
+    "response": "1–2 días hábiles"
+  },
+  "inProgress": [
+    {
+      "kind": "Carrera",
+      "title": "Ingeniería en Ciberseguridad y Auditoría",
+      "org": "Universidad San Sebastián",
+      "detail": "Modalidad online, compatible con jornada laboral",
+      "when": "2026 → en curso"
+    },
+    {
+      "kind": "Certificación",
+      "title": "CompTIA Security+ (SY0-701)",
+      "org": "Preparación con curso completo y exámenes de práctica (Udemy)",
+      "detail": "Examen a rendir durante 2026",
+      "when": "En curso"
+    }
+  ],
+  "education": [
+    {
+      "title": "Ingeniería en Ciberseguridad y Auditoría",
+      "org": "Universidad San Sebastián",
+      "when": "2026 – actualidad",
+      "note": "En curso · modalidad online"
+    },
+    {
+      "title": "Diplomado en Ciberseguridad",
+      "org": "UDD",
+      "when": "Sep – Dic 2024",
+      "note": "120 h · nota 6,7/7,0 · proyecto de título 6,9: riesgos NIST CSF en sitio productivo"
+    },
+    {
+      "title": "Técnico en Diseño y Programación Multimedia",
+      "org": "INACAP",
+      "when": "2010 – 2012",
+      "note": ""
+    }
+  ],
+  "training": [
+    {
+      "title": "CompTIA Security+ (SY0-701) Complete Course & Practice Exam",
+      "org": "Udemy",
+      "when": "En curso",
+      "note": "Para rendir el examen CompTIA Security+"
+    },
+    {
+      "title": "Cisco: CCNA Introduction to Networks · Python Essentials 1",
+      "org": "Cisco Networking Academy",
+      "when": "Sep 2026",
+      "note": "Badges verificados en Credly: switching, IPv4/IPv6 y subnetting; Python"
+    },
+    {
+      "title": "Curso completo de Hacking Ético y Ciberseguridad",
+      "org": "Udemy",
+      "when": "May 2025",
+      "note": "21,5 h · pentesting en entornos controlados: Kali Linux, Metasploit, Burp Suite, Wireshark"
+    }
+  ],
+  "tools": [
+    {
+      "group": "Desarrollo web",
+      "items": [
+        "Claude Code",
+        "Webflow",
+        "Shopify",
+        "WordPress",
+        "WooCommerce",
+        "Cloudflare"
+      ]
+    },
+    {
+      "group": "Sistemas y redes",
+      "items": [
+        "Windows",
+        "Linux",
+        "macOS",
+        "KVM · QEMU",
+        "Pi-hole",
+        "Redes IPv4/IPv6"
+      ]
+    },
+    {
+      "group": "Seguridad",
+      "items": [
+        "Kali Linux",
+        "Metasploit",
+        "Burp Suite",
+        "Wireshark"
+      ]
+    },
+    {
+      "group": "Programación",
+      "items": [
+        "Python"
+      ]
+    },
+    {
+      "group": "Gestión y soporte",
+      "items": [
+        "Jira",
+        "Asana",
+        "SupportPal"
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "name": "Español",
+      "level": "Nativo"
+    },
+    {
+      "name": "Inglés",
+      "level": "C2 Proficient",
+      "note": "EF SET 73/100"
+    }
+  ],
+  "attributes": [
+    "Liderazgo",
+    "Resolución de problemas",
+    "Comunicación técnica",
+    "Proactividad y autonomía",
+    "Trabajo en equipo"
+  ],
+  "contact": {
+    "response": "1–2 días hábiles",
+    "timezone": "America/Santiago",
+    "hours": [
+      9,
+      19
+    ],
+    "calendar": "https://cal.com/wlaque/20min",
+    "pgp": {
+      "fingerprint": "XXXX XXXX XXXX XXXX XXXX  XXXX XXXX XXXX XXXX XXXX",
+      "href": "/pgp.asc"
+    }
+  },
+  "types": [
+    {
+      "id": "todo",
+      "label": "Todo"
+    },
+    {
+      "id": "entrada",
+      "label": "Entradas"
+    },
+    {
+      "id": "proyecto",
+      "label": "Proyectos"
+    }
+  ]
+}

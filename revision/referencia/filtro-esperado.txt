@@ -1,0 +1,5 @@
+Todos      | destacado visible | título: 'Entradas recientes' | botón activo: ['Todos'] | filas: 5 ['Homelab', 'Ciberseguridad', 'Webflow', 'Dev', 'Astro'] 
+Dev        | destacado oculto  | título: 'Tema: Dev' | botón activo: ['Dev'] | filas: 5 ['Dev', 'Dev', 'Dev', 'Dev', 'Dev'] 
+Homelab    | destacado oculto  | título: 'Tema: Homelab' | botón activo: ['Homelab'] | filas: 4 ['Homelab', 'Homelab', 'Homelab', 'Homelab'] 
+Astro      | destacado oculto  | título: 'Tema: Astro' | botón activo: ['Astro'] | filas: 3 ['Astro', 'Astro', 'Astro'] 
+Inventado  | destacado visible | título: 'Entradas recientes' | botón activo: ['Todos'] | filas: 5 ['Homelab', 'Ciberseguridad', 'Webflow', 'Dev', 'Astro'] 
