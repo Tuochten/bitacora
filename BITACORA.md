@@ -35,7 +35,7 @@ El dueño entregó las páginas interiores (v2.1.0: blog con paginación, entrad
 - El revisor corrigió directo (era más barato que otra ronda): terminó el home, restauró `sitio.js` y amplió su prueba, pasó Sobre mí a JSX y arregló los `href`. La diferencia visual que quedaba era que las páginas no importaban `prosa.css`; con eso, 0 píxeles distintos.
 - El trabajo no pedido quedó en la rama `wip/blog-orden-07`, fuera de `main`.
 - Reglas nuevas en `AGENTS.md` por estos errores. Herramienta nueva: medir posiciones de elementos con el navegador para ubicar diferencias de píxeles que el comparador de markup no ve (el script quedó en la sesión; rehacerlo con CDP como `probar-interaccion.mjs` si hace falta).
-- Repo subido a GitHub (privado hasta el 2026-10-12; desde ese día es público como `Tuochten/bitacora`, con el historial empezado de cero).
+- Repo subido a GitHub, privado. Desde el 2026-10-12 tiene este espejo público, `Tuochten/bitacora`, con el historial empezado de cero.
 
 **Lección:** el método funciona cuando la orden es chica y acotada. Órdenes grandes o encadenadas sin revisión entre medio (07→08→09 corrieron solas para ahorrar cuota) dejaron que un desvío de la 07 contaminara la 08. Mañana: una orden, una revisión.
 
@@ -80,6 +80,12 @@ El dueño entregó las páginas interiores (v2.1.0: blog con paginación, entrad
 - Sobre mí: el rol ya no deja "Ingeniería." sola en la segunda línea (`.intro .lede` sin el `62ch`).
 - Ramas `wip/blog-orden-07` y `formulario` borradas. El handoff del primer diseño (el de los intentos abandonados) quedó archivado fuera del repo.
 
+### 2026-10-12 (noche) · espejo público
+- **El trabajo sigue en este repo privado** (decisión del dueño: aquí está todo el contexto). Desde el 2026-10-12 hay un **espejo público, `Tuochten/bitacora`** (carpeta hermana `../bitacora`), con historial empezado de cero, commits firmados con el correo anónimo de GitHub, README y licencia propios (MIT el código; textos, fotos, ongoro y diseño reservados).
+- Para actualizarlo: `python3 revision/espejo-publico.py` (simula) y `--escribir` (copia). Limpia sola el Gmail del handoff, las capturas del handoff y los pasajes privados de la bitácora y las guías, y **se niega a copiar** si encuentra algo de su lista de prohibidos. Ese script no se copia al espejo. El commit del espejo se revisa y se hace a mano, en `../bitacora`.
+- Cloudflare sigue desplegando desde este repo privado; el espejo no despliega nada.
+- Miniatura del post de wlaque.cl: el home en pequeño (captura del dueño, recortada a 960×600).
+
 ## Decisiones tomadas
 
 | Decisión | Por qué |
@@ -97,7 +103,7 @@ Ver `TAREAS.md`.
 
 ## Entorno y trampas conocidas
 
-- **Repo:** `git clone https://github.com/Tuochten/bitacora.git`. Desde otra máquina: `pnpm install && pnpm dev` y leer esta bitácora.
+- **Repo:** `git clone https://github.com/Tuochten/bitacora.git` (espejo público; el trabajo diario va en un repo privado). Desde otra máquina: `pnpm install && pnpm dev` y leer esta bitácora.
 - **Máquina de trabajo:** desktop CachyOS (RTX 5080 16 GB + RTX 2060 8 GB). El modelo local y llama-swap (`127.0.0.1:9292`) solo existen ahí. Desde otra máquina el sitio se trabaja igual (`pnpm install && pnpm dev`), pero sin el agente local.
 - **El agente de OpenCode corre en un panel de herdr** llamado `constructor`. Cómo montarlo: `revision/README.md`.
 - **La herramienta Write de Claude Code convierte los escapes `̀` en caracteres literales.** Después de escribir un archivo con escapes Unicode, revisar con `grep -c u0300` y corregir con un script de Python.
