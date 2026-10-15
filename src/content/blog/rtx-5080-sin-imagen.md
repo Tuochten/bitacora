@@ -63,7 +63,7 @@ Para cerrar, le activé el Precision Boost Overdrive con un Curve Optimizer de -
 
 Nueve meses después:
 
-- **La fuente es la misma GameMax, con su cable 12V-2x6 nativo.** No la devolví y funciona. No sé exactamente qué cambió. El cable llegaba a la tarjeta con una curva cerrada justo en el conector, y con este estándar eso basta para que los pines de detección no hagan buen contacto, pero no tengo cómo comprobar que fuera eso.
+- **La fuente es la misma GameMax, con su cable 12V-2x6 nativo.** No la devolví y funciona. Mirando atrás, mi sospecha más fuerte ya no es el cable sino la RAM: con los dos módulos de 8 GB mezclados con los de 16, el sistema andaba al límite de su estabilidad, y desde que los saqué arranca bien siempre. Ese día además todo estaba bajo estrés a la vez, con BIOS recién reseteada, pasta nueva y tarjeta nueva, y un sistema al borde falla a veces sí y a veces no.
 - **La tarjeta anda en PCIe Gen4.** Lo medí hoy bajo carga. Forzar Gen3 no era el arreglo, y ya no lo uso. Va a x8, porque comparte el bus con una segunda tarjeta que uso para modelos de IA locales.
 - **La RAM sigue en 32 GB, a 3000 MT/s.** En septiembre volví a probar los cuatro módulos y la placa ni siquiera hizo el POST. Por qué el kit no llega a 3600 en esta placa sigue siendo una pregunta abierta.
 
