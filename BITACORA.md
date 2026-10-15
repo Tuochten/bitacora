@@ -17,7 +17,7 @@ Se construye con un flujo de dos agentes: **Claude Code dirige y revisa** (escri
 | Home adaptada a v2.1 | ✅ 9/9 piezas IDÉNTICAS, filtro igual al prototipo, 0 píxeles distintos (2026-09-29) |
 | Desarrollo web, Sobre mí, Contacto | ✅ 0 píxeles distintos a 1440 px; en Contacto solo difiere el reloj (muestra la hora actual). Formulario activo y probado en el preview (2026-10-12) |
 | Blog: listado, entradas (3 variantes), RSS y sitemap | ✅ IDÉNTICOS al prototipo, 0 píxeles distintos a 1440 y 390 px (2026-09-29, tarde) |
-| Contenido | ✅ 5 entradas reales y 4 proyectos; sin maqueta (2026-10-15) |
+| Contenido | ✅ 7 entradas reales y 4 proyectos; sin maqueta (2026-10-15) |
 | Publicación | ✅ En `wlaque.cl` desde el 2026-10-12 (rutas, una subcarpeta del hosting anterior excluida, `www` redirigido) |
 
 ## Cronología
@@ -91,6 +91,13 @@ El dueño entregó las páginas interiores (v2.1.0: blog con paginación, entrad
 - En las capturas se tapó el nombre del servidor (queda `homelab-1`), el del tailnet y la IP de Pi-hole en Tailscale. Las de terminal tienen versión `.movil` reconstruida en HTML.
 - **Fecha de publicación elegida: 2026-10-02**, a pedido del dueño de no fecharlo hoy: queda después del post de Pi-hole (26-sep), que enlaza y cuyo estado final describe.
 - `espejo-publico.py` ahora permite `192.168.122.x`: es la red por defecto de libvirt, igual en cualquier máquina.
+
+### 2026-10-15 (tarde) · RTX 5080, nacimiento del homelab y tema Hardware
+- Dos posts más sacados del export, con el mismo esqueleto que el de Virtual Machine Manager: `rtx-5080-sin-imagen` (fechado el 2026-10-07) y `nacimiento-del-homelab` (fechado el 2026-09-30). Los hechos se contrastaron con el desktop (BIOS, PCIe bajo carga, RAM vía `udevadm`) y con el servidor por SSH (fecha de instalación, netplan, LVM, políticas de reinicio).
+- El dueño confirmó que la fuente GameMax se quedó, con su cable nativo; el post lo cuenta así y deja la causa del fallo como sospecha.
+- **Tema nuevo, Hardware**: `preparar-datos.py` agrega al final de los filtros cualquier tema que solo usen los posts propios; su color (`--gold`) está en `ajustes.css`.
+- El proyecto Homelab ahora parte en **2025 →** (la torre de antes del notebook), por decisión del dueño.
+- Un caso de trabajo anonimizado (TTFB vs. "la culpa es de Cloudflare") quedó como **borrador en la rama local `borrador-casos-trabajo`, sin push**: el dueño revisa cada post de trabajo antes de publicarlo.
 
 ## Decisiones tomadas
 
