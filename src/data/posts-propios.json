@@ -140,5 +140,23 @@
       "Scripts internos para tareas repetitivas de WooCommerce: migrar órdenes entre ambientes, importar catálogos y reparar metadatos.",
       "Nacieron de problemas reales en producción y se fueron ordenando hasta quedar como una caja de herramientas reutilizable."
     ]
+  },
+  {
+    "slug": "virt-manager-se-comio-el-dns",
+    "category": "Homelab",
+    "featured": false,
+    "title": "Instalé Virtual Machine Manager en el homelab y mis equipos se quedaron sin internet",
+    "shortTitle": "libvirt y el puerto 53",
+    "description": "Quería un Windows liviano para jugar con un servidor de MU Online. Terminé con el puerto 53 tomado por libvirt, Pi-hole caído y, por Tailscale, todos mis equipos sin resolver nombres.",
+    "date": "2026-10-02",
+    "readingTime": "5 min",
+    "cover": "/blog/virt-manager-se-comio-el-dns/portada.webp",
+    "tags": [
+      "libvirt",
+      "DNS",
+      "Pi-hole",
+      "Tailscale"
+    ],
+    "type": "entrada"
   }
 ]
