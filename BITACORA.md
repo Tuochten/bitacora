@@ -17,7 +17,7 @@ Se construye con un flujo de dos agentes: **Claude Code dirige y revisa** (escri
 | Home adaptada a v2.1 | ✅ 9/9 piezas IDÉNTICAS, filtro igual al prototipo, 0 píxeles distintos (2026-09-29) |
 | Desarrollo web, Sobre mí, Contacto | ✅ 0 píxeles distintos a 1440 px; en Contacto solo difiere el reloj (muestra la hora actual). Formulario activo y probado en el preview (2026-10-12) |
 | Blog: listado, entradas (3 variantes), RSS y sitemap | ✅ IDÉNTICOS al prototipo, 0 píxeles distintos a 1440 y 390 px (2026-09-29, tarde) |
-| Contenido | ✅ 7 entradas reales y 4 proyectos; sin maqueta (2026-10-15) |
+| Contenido | ✅ 8 entradas reales y 4 proyectos; sin maqueta (2026-10-15) |
 | Publicación | ✅ En `wlaque.cl` desde el 2026-10-12 (rutas, una subcarpeta del hosting anterior excluida, `www` redirigido) |
 
 ## Cronología
@@ -97,7 +97,8 @@ El dueño entregó las páginas interiores (v2.1.0: blog con paginación, entrad
 - El dueño confirmó que la fuente GameMax se quedó, con su cable nativo; el post lo cuenta así y deja la causa del fallo como sospecha.
 - **Tema nuevo, Hardware**: `preparar-datos.py` agrega al final de los filtros cualquier tema que solo usen los posts propios; su color (`--gold`) está en `ajustes.css`.
 - El proyecto Homelab ahora parte en **2025 →** (la torre de antes del notebook), por decisión del dueño.
-- Un caso de trabajo anonimizado (TTFB vs. "la culpa es de Cloudflare") quedó como **borrador en la rama local `borrador-casos-trabajo`, sin push**: el dueño revisa cada post de trabajo antes de publicarlo.
+- Primer caso de trabajo anonimizado: `la-culpa-es-de-cloudflare` (TTFB vs. "la culpa es de Cloudflare"), revisado y aprobado por el dueño, publicado el mismo día. Sin cliente, dominio, persona, empresa ni nombre del servicio. El dueño revisa cada post de trabajo antes de publicarlo.
+- Post de la RTX 5080: a pedido del dueño, la sospecha principal pasó del cable a la RAM (la mezcla de 2×16 + 2×8 GB andaba al límite).
 
 ## Decisiones tomadas
 

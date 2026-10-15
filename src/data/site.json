@@ -336,6 +336,24 @@
         "Pi-hole"
       ],
       "type": "entrada"
+    },
+    {
+      "slug": "la-culpa-es-de-cloudflare",
+      "category": "Dev",
+      "featured": false,
+      "title": "\"Desde que pusieron Cloudflare, el sitio está lento\": cómo lo descarté con dos curl",
+      "shortTitle": "La culpa es de Cloudflare",
+      "description": "Un cliente de hosting culpaba a Cloudflare de que su WordPress casi no cargara. Dos mediciones de TTFB, una contra el sitio y otra contra un PHP vacío, separaron al servidor de la aplicación.",
+      "date": "2026-10-14",
+      "readingTime": "5 min",
+      "cover": "/blog/la-culpa-es-de-cloudflare/portada.webp",
+      "tags": [
+        "WordPress",
+        "TTFB",
+        "Cloudflare",
+        "Hosting"
+      ],
+      "type": "entrada"
     }
   ],
   "nav": [
