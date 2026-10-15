@@ -17,7 +17,7 @@ Se construye con un flujo de dos agentes: **Claude Code dirige y revisa** (escri
 | Home adaptada a v2.1 | ✅ 9/9 piezas IDÉNTICAS, filtro igual al prototipo, 0 píxeles distintos (2026-09-29) |
 | Desarrollo web, Sobre mí, Contacto | ✅ 0 píxeles distintos a 1440 px; en Contacto solo difiere el reloj (muestra la hora actual). Formulario activo y probado en el preview (2026-10-12) |
 | Blog: listado, entradas (3 variantes), RSS y sitemap | ✅ IDÉNTICOS al prototipo, 0 píxeles distintos a 1440 y 390 px (2026-09-29, tarde) |
-| Contenido | ✅ 4 entradas reales y 4 proyectos; sin maqueta (2026-09-30) |
+| Contenido | ✅ 5 entradas reales y 4 proyectos; sin maqueta (2026-10-15) |
 | Publicación | ✅ En `wlaque.cl` desde el 2026-10-12 (rutas, una subcarpeta del hosting anterior excluida, `www` redirigido) |
 
 ## Cronología
@@ -85,6 +85,12 @@ El dueño entregó las páginas interiores (v2.1.0: blog con paginación, entrad
 - Para actualizarlo: `python3 revision/espejo-publico.py` (simula) y `--escribir` (copia). Limpia sola el Gmail del handoff, las capturas del handoff y los pasajes privados de la bitácora y las guías, y **se niega a copiar** si encuentra algo de su lista de prohibidos. Ese script no se copia al espejo. El commit del espejo se revisa y se hace a mano, en `../bitacora`.
 - Cloudflare sigue desplegando desde este repo privado; el espejo no despliega nada.
 - Miniatura del post de wlaque.cl: el home en pequeño (captura del dueño, recortada a 960×600).
+
+### 2026-10-15 · post de Virtual Machine Manager
+- Primer post sacado del export de ChatGPT del dueño: `virt-manager-se-comio-el-dns`, con 4 capturas suyas de esos chats. Los hechos se contrastaron con el historial de `apt` del servidor y con el desktop; donde el export no muestra el desenlace, el texto no lo afirma.
+- En las capturas se tapó el nombre del servidor (queda `homelab-1`), el del tailnet y la IP de Pi-hole en Tailscale. Las de terminal tienen versión `.movil` reconstruida en HTML.
+- **Fecha de publicación elegida: 2026-10-02**, a pedido del dueño de no fecharlo hoy: queda después del post de Pi-hole (26-sep), que enlaza y cuyo estado final describe.
+- `espejo-publico.py` ahora permite `192.168.122.x`: es la red por defecto de libvirt, igual en cualquier máquina.
 
 ## Decisiones tomadas
 
