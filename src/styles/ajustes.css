@@ -7,3 +7,6 @@
 
 /* Sobre mí: el rol ("… · Estudiante de Ingeniería.") cabe en una línea; el 62ch del diseño dejaba "Ingeniería." sola */
 .intro .lede{max-width:none;text-wrap:balance}
+
+/* Tema "Hardware" (2026-10-15): no viene del diseño; el dorado es el único tono de la paleta sin tema */
+.cat.Hardware{color:var(--gold)}

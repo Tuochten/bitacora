@@ -59,6 +59,10 @@ def main():
         # un post propio con el slug de uno del handoff lo reemplaza (los textos de los proyectos, 2026-10-12)
         propios_slugs = {p["slug"] for p in propios}
         d["posts"] = [p for p in d["posts"] if p["slug"] not in propios_slugs] + propios
+        # un tema que solo usan los posts propios (Hardware, 2026-10-15) entra al final de los filtros
+        for p in propios:
+            if p.get("category") and p["category"] not in d["tags"]:
+                d["tags"].append(p["category"])
         # una portada que no existe en public/ (la de WooCommerce del handoff es de maqueta) cae al ongoro.
         # Se resuelve aquí y no en el build: en el build de Cloudflare no se puede contar con encontrar public/.
         for p in d["posts"]:

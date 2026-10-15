@@ -120,7 +120,8 @@
     "Ciberseguridad",
     "Homelab",
     "Webflow",
-    "Astro"
+    "Astro",
+    "Hardware"
   ],
   "posts": [
     {
@@ -249,12 +250,13 @@
       "tags": [],
       "project": {
         "state": "activo",
-        "since": "2024 →",
+        "since": "2025 →",
         "stack": "Ubuntu Server · Docker · Pi-hole · restic · Tailscale",
         "kind": "Personal"
       },
       "body": [
         "Un notebook con Ubuntu Server en la red de mi casa, con Docker: Pi-hole como DNS (también de mis equipos fuera de la casa, por Tailscale), Nextcloud, Jellyfin y Nginx Proxy Manager. Los datos de los contenedores se respaldan con restic hacia un disco de mi desktop.",
+        "Partió en 2025 en una torre vieja con Ubuntu, que guardaba lo de Jellyfin y compartía un disco por la red. El notebook la reemplazó en febrero de 2026.",
         "La IA local vive en el desktop, que es el que tiene la GPU: llama.cpp y Open WebUI, al alcance de todos mis equipos por Tailscale.",
         "Existe para probar en casa lo que después toco en el trabajo: cambios de DNS, respaldos y actualizaciones. Si algo se rompe acá, el único afectado soy yo."
       ]
@@ -296,6 +298,42 @@
         "DNS",
         "Pi-hole",
         "Tailscale"
+      ],
+      "type": "entrada"
+    },
+    {
+      "slug": "rtx-5080-sin-imagen",
+      "category": "Hardware",
+      "featured": false,
+      "title": "Cambié la RTX 3080 por una 5080 y el PC no quiso dar imagen",
+      "shortTitle": "RTX 5080 sin imagen",
+      "description": "Una tarjeta nueva, una fuente nueva y una BIOS vieja. Terminé con la CPU pegada al disipador, tres códigos de error y una RAM que nunca llegó a 3600.",
+      "date": "2026-10-07",
+      "readingTime": "7 min",
+      "cover": "/blog/rtx-5080-sin-imagen/portada.webp",
+      "tags": [
+        "RTX 5080",
+        "BIOS",
+        "RAM",
+        "Ryzen"
+      ],
+      "type": "entrada"
+    },
+    {
+      "slug": "nacimiento-del-homelab",
+      "category": "Homelab",
+      "featured": false,
+      "title": "Así nació mi homelab: un notebook desocupado y un mes de tropiezos",
+      "shortTitle": "Así nació el homelab",
+      "description": "Instalé Ubuntu Server en un notebook que no usaba y el primer mes fue una seguidilla de errores chicos: la red, el escritorio, Docker, Pi-hole y un disco de 1 TB que solo usaba 100 GB.",
+      "date": "2026-09-30",
+      "readingTime": "7 min",
+      "cover": "/blog/nacimiento-del-homelab/portada.webp",
+      "tags": [
+        "Ubuntu Server",
+        "netplan",
+        "Docker",
+        "Pi-hole"
       ],
       "type": "entrada"
     }
