@@ -231,5 +231,39 @@
       "Retro"
     ],
     "type": "entrada"
+  },
+  {
+    "slug": "webhook-200-ok",
+    "category": "Dev",
+    "featured": false,
+    "title": "El webhook respondía 200 OK y los pedidos nunca llegaban",
+    "shortTitle": "Webhook 200 OK",
+    "description": "Una tienda WooCommerce conectada a Odoo dejó de mandar pedidos al pasar a producción. Todos decían que su parte funcionaba. El registro de entregas de WooCommerce mostró quién tenía razón.",
+    "date": "2026-10-10",
+    "readingTime": "5 min",
+    "cover": "/blog/webhook-200-ok/portada.webp",
+    "tags": [
+      "WooCommerce",
+      "Odoo",
+      "Webhooks"
+    ],
+    "type": "entrada"
+  },
+  {
+    "slug": "un-pedido-dos-documentos",
+    "category": "Dev",
+    "featured": false,
+    "title": "Un pedido, dos clientes y dos documentos tributarios: WooCommerce no duplicó nada",
+    "shortTitle": "Un pedido, dos documentos",
+    "description": "Una tienda reportó que WooCommerce le había dado el mismo número de pedido a dos compras distintas, una con boleta y otra con factura. Los registros del checkout y dos consultas de solo lectura contaron otra historia.",
+    "date": "2026-10-08",
+    "readingTime": "5 min",
+    "cover": "/blog/un-pedido-dos-documentos/portada.webp",
+    "tags": [
+      "WooCommerce",
+      "MySQL",
+      "Facturación"
+    ],
+    "type": "entrada"
   }
 ]

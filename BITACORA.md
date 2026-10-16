@@ -17,7 +17,7 @@ Se construye con un flujo de dos agentes: **Claude Code dirige y revisa** (escri
 | Home adaptada a v2.1 | ✅ 9/9 piezas IDÉNTICAS, filtro igual al prototipo, 0 píxeles distintos (2026-09-29) |
 | Desarrollo web, Sobre mí, Contacto | ✅ 0 píxeles distintos a 1440 px; en Contacto solo difiere el reloj (muestra la hora actual). Formulario activo y probado en el preview (2026-10-12) |
 | Blog: listado, entradas (3 variantes), RSS y sitemap | ✅ IDÉNTICOS al prototipo, 0 píxeles distintos a 1440 y 390 px (2026-09-29, tarde) |
-| Contenido | ✅ 9 entradas reales y 4 proyectos; sin maqueta (2026-10-15) |
+| Contenido | ✅ 11 entradas reales y 4 proyectos; sin maqueta (2026-10-15) |
 | Publicación | ✅ En `wlaque.cl` desde el 2026-10-12 (rutas, una subcarpeta del hosting anterior excluida, `www` redirigido) |
 
 ## Cronología
@@ -105,6 +105,11 @@ El dueño entregó las páginas interiores (v2.1.0: blog con paginación, entrad
 - **Primer post con video.** Va como HTML dentro del Markdown: `<figure class="video"><video …></video><figcaption>…</figcaption></figure>`. El estilo está en `ajustes.css` (angosto y centrado, porque son verticales). Solo 3 videos (17 MB en total); las fotos verticales van de a dos en una sola imagen para que no queden gigantes.
 - **Los assets de Workers no soportan Range** (devuelven 200 con el archivo entero) y Safari no reproduce video sin eso. Ahora los `.mp4` pasan por el Worker (`run_worker_first: "/*.mp4"`), que responde 206 cortando en memoria. Probado en local con `wrangler dev` (byte a byte) y en producción.
 - En zsh, `${r:+-H "Range: $r"}` no arma bien la cabecera de curl: la prueba con rangos devolvía 400 por culpa del shell, no del Worker.
+
+### 2026-10-15 (noche) · dos casos de trabajo más
+- Publicados `webhook-200-ok` y `un-pedido-dos-documentos`, aprobados por el dueño. Sin cliente, dominio, personas, integrador, sistema de facturación, números de pedido o folio ni fechas exactas. Como el final no consta en el export, los dos lo dicen con prudencia: el del webhook termina donde terminaba la parte del dueño, y el de la factura cuenta en su voz, con la duda declarada, que el pedido apareció.
+- El caso del plugin con el CVE quedó fuera: publicar que clientes usan un plugin abandonado con una vulnerabilidad pública, sin que conste el parche, es darle una pista a un atacante.
+- Listas numeradas: el diseño solo estilaba `ul`; el `ol` quedaba con el número del navegador fuera del margen y además con la ›. Arreglado en `ajustes.css`.
 
 ## Decisiones tomadas
 
