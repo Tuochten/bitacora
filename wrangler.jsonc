@@ -9,8 +9,9 @@
 	"assets": {
 		"directory": "./dist",
 		"binding": "ASSETS",
-		// el resto del sitio se sirve directo, sin pasar por el Worker
-		"run_worker_first": ["/api/*"]
+		// el resto del sitio se sirve directo, sin pasar por el Worker; los videos pasan por él para
+		// responder por partes (Range), que Safari exige para reproducirlos
+		"run_worker_first": ["/api/*", "/*.mp4"]
 	},
 	// Email Routing: sin restricción de destino, porque el destino es el secret DESTINO,
 	// que tiene que ser una dirección verificada en Email Routing

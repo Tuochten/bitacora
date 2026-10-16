@@ -25,9 +25,37 @@ export default {
       destino.searchParams.set(codigo === 'ok' ? 'enviado' : 'error', codigo === 'ok' ? '1' : codigo);
       return Response.redirect(destino.toString(), 303);
     }
+    if (url.pathname.endsWith('.mp4')) return porPartes(request, env);
     return env.ASSETS.fetch(request);
   },
 };
+
+// Videos con soporte de Range (2026-10-15, post del GameCube). Los assets estáticos de Workers devuelven
+// siempre el archivo entero (200), y Safari en iPhone y Mac no reproduce un <video> si el servidor no
+// responde 206 a "Range: bytes=0-1". Los videos del blog pesan pocos MB, así que se cortan en memoria.
+async function porPartes(request, env) {
+  const asset = await env.ASSETS.fetch(new Request(request, { method: 'GET' }));
+  if (asset.status !== 200) return asset;
+  const headers = new Headers(asset.headers);
+  headers.set('Accept-Ranges', 'bytes');
+  const sinCuerpo = request.method === 'HEAD';
+  const m = /^bytes=(\d*)-(\d*)$/.exec((request.headers.get('Range') || '').trim());
+  if (!m || (m[1] === '' && m[2] === '')) return new Response(sinCuerpo ? null : asset.body, { status: 200, headers });
+
+  const cuerpo = await asset.arrayBuffer();
+  const total = cuerpo.byteLength;
+  // "bytes=-500" son los últimos 500; "bytes=500-" va del 500 al final
+  const inicio = m[1] === '' ? Math.max(0, total - Number(m[2])) : Number(m[1]);
+  const fin = m[1] === '' || m[2] === '' ? total - 1 : Math.min(Number(m[2]), total - 1);
+  if (inicio > fin || inicio >= total) {
+    headers.delete('Content-Length');
+    headers.set('Content-Range', `bytes */${total}`);
+    return new Response(null, { status: 416, headers });
+  }
+  headers.set('Content-Range', `bytes ${inicio}-${fin}/${total}`);
+  headers.set('Content-Length', String(fin - inicio + 1));
+  return new Response(sinCuerpo ? null : cuerpo.slice(inicio, fin + 1), { status: 206, headers });
+}
 
 // Devuelve { estado, codigo }: el estado HTTP y un código corto que el formulario traduce a un mensaje.
 async function contacto(request, env) {

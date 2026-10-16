@@ -354,6 +354,24 @@
         "Hosting"
       ],
       "type": "entrada"
+    },
+    {
+      "slug": "gamecube-segunda-vida",
+      "category": "Hardware",
+      "featured": false,
+      "title": "Le di una segunda vida a la GameCube de mi infancia",
+      "shortTitle": "GameCube, segunda vida",
+      "description": "La primera vez que abro una consola: la GameCube de la familia, con el lector muerto, ahora carga juegos desde una microSD con un PicoLoader que se instala sin soldar y se puede quitar.",
+      "date": "2026-10-04",
+      "readingTime": "5 min",
+      "cover": "/blog/gamecube-segunda-vida/portada.webp",
+      "tags": [
+        "GameCube",
+        "PicoLoader",
+        "Swiss",
+        "Retro"
+      ],
+      "type": "entrada"
     }
   ],
   "nav": [

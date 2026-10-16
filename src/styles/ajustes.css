@@ -10,3 +10,7 @@
 
 /* Tema "Hardware" (2026-10-15): no viene del diseño; el dorado es el único tono de la paleta sin tema */
 .cat.Hardware{color:var(--gold)}
+
+/* Videos en las entradas (2026-10-15, post del GameCube): son verticales, así que van angostos y centrados */
+.prose figure.video{background:#000}
+.prose figure.video video{display:block;width:100%;max-width:420px;height:auto;margin:0 auto}
