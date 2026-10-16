@@ -265,5 +265,77 @@
       "Facturación"
     ],
     "type": "entrada"
+  },
+  {
+    "slug": "respaldo-de-una-casilla-cpanel",
+    "title": "Respaldar una sola casilla de correo en cPanel (y dónde no dejar el respaldo)",
+    "shortTitle": "Respaldo de una casilla",
+    "description": "Un cliente pidió el respaldo de una cuenta de correo. cPanel no tiene un botón para eso, el tar terminó en la carpeta de root y el cliente no encontraba sus correos en el archivo. Así se hace bien.",
+    "date": "2026-10-06",
+    "readingTime": "5 min",
+    "tags": [
+      "cPanel",
+      "Correo",
+      "Linux",
+      "Respaldos"
+    ],
+    "category": "Dev",
+    "featured": false,
+    "cover": "/blog/respaldo-de-una-casilla-cpanel/portada.webp",
+    "type": "entrada"
+  },
+  {
+    "slug": "cloudflare-que-nadie-configuro",
+    "title": "El dominio sin www daba errores de Cloudflare, y nadie había configurado Cloudflare",
+    "shortTitle": "El Cloudflare que nadie configuró",
+    "description": "Migré un WordPress de hosting y, mientras cambiaban los DNS, el dominio sin www mostraba errores de Cloudflare. La explicación estaba en a quién pertenecía la IP del hosting nuevo.",
+    "date": "2026-10-09",
+    "readingTime": "5 min",
+    "tags": [
+      "DNS",
+      "SSL",
+      "WordPress",
+      "Cloudflare"
+    ],
+    "category": "Dev",
+    "featured": false,
+    "cover": "/blog/cloudflare-que-nadie-configuro/portada.webp",
+    "type": "entrada"
+  },
+  {
+    "slug": "productos-simples-a-variantes-shopify",
+    "title": "Miles de productos simples que en realidad eran variantes: el plan para llevarlos a Shopify",
+    "shortTitle": "De simples a variantes",
+    "description": "Una tienda en WooCommerce quería pasarse a Shopify, pero tenía cada peso de cada producto cargado como un producto distinto. Antes de migrar había que reagruparlos, y el primer paso fue pedir definiciones, no escribir código.",
+    "date": "2026-10-03",
+    "readingTime": "6 min",
+    "tags": [
+      "WooCommerce",
+      "Shopify",
+      "CSV",
+      "Python"
+    ],
+    "category": "Dev",
+    "featured": false,
+    "cover": "/blog/productos-simples-a-variantes-shopify/portada.webp",
+    "type": "entrada"
+  },
+  {
+    "slug": "plugin-abandonado-con-cve",
+    "category": "Ciberseguridad",
+    "featured": false,
+    "title": "Un plugin abandonado con una vulnerabilidad pública: se lo avisé a su autor y nadie contestó",
+    "shortTitle": "Un plugin abandonado con CVE",
+    "description": "Un plugin de WooCommerce pensado para tiendas chilenas tiene un CSRF publicado desde 2023 y ningún parche. Cómo funciona la falla, qué pasó cuando lo reporté y qué hacer si tu tienda lo usa.",
+    "date": "2026-10-11",
+    "readingTime": "5 min",
+    "cover": "/blog/plugin-abandonado-con-cve/portada.webp",
+    "tags": [
+      "WordPress",
+      "CSRF",
+      "CVE",
+      "WooCommerce"
+    ],
+    "type": "entrada"
   }
 ]

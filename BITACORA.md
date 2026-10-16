@@ -17,7 +17,7 @@ Se construye con un flujo de dos agentes: **Claude Code dirige y revisa** (escri
 | Home adaptada a v2.1 | ✅ 9/9 piezas IDÉNTICAS, filtro igual al prototipo, 0 píxeles distintos (2026-09-29) |
 | Desarrollo web, Sobre mí, Contacto | ✅ 0 píxeles distintos a 1440 px; en Contacto solo difiere el reloj (muestra la hora actual). Formulario activo y probado en el preview (2026-10-12) |
 | Blog: listado, entradas (3 variantes), RSS y sitemap | ✅ IDÉNTICOS al prototipo, 0 píxeles distintos a 1440 y 390 px (2026-09-29, tarde) |
-| Contenido | ✅ 11 entradas reales y 4 proyectos; sin maqueta (2026-10-15) |
+| Contenido | ✅ 15 entradas reales y 4 proyectos; sin maqueta (2026-10-15) |
 | Publicación | ✅ En `wlaque.cl` desde el 2026-10-12 (rutas, una subcarpeta del hosting anterior excluida, `www` redirigido) |
 
 ## Cronología
@@ -110,6 +110,12 @@ El dueño entregó las páginas interiores (v2.1.0: blog con paginación, entrad
 - Publicados `webhook-200-ok` y `un-pedido-dos-documentos`, aprobados por el dueño. Sin cliente, dominio, personas, integrador, sistema de facturación, números de pedido o folio ni fechas exactas. Como el final no consta en el export, los dos lo dicen con prudencia: el del webhook termina donde terminaba la parte del dueño, y el de la factura cuenta en su voz, con la duda declarada, que el pedido apareció.
 - El caso del plugin con el CVE quedó fuera: publicar que clientes usan un plugin abandonado con una vulnerabilidad pública, sin que conste el parche, es darle una pista a un atacante.
 - Listas numeradas: el diseño solo estilaba `ul`; el `ol` quedaba con el número del navegador fuera del margen y además con la ›. Arreglado en `ajustes.css`.
+
+### 2026-10-15 (noche) · los casos que quedaban
+- Publicados `respaldo-de-una-casilla-cpanel`, `cloudflare-que-nadie-configuro` y `productos-simples-a-variantes-shopify`, con permiso del dueño para publicar sin revisión previa ("los reviso en vivo").
+- En el de Cloudflare se corrigió la conclusión del chat: la IP del hosting nuevo **no es de Cloudflare** (RDAP de ARIN: es del hosting, y no está en los rangos públicos de Cloudflare), pero responde con `server: cloudflare`. El hosting atiende sus sitios a través de Cloudflare.
+- El script `agrupar.py` del post de Shopify se probó con un CSV inventado antes de publicarlo; la primera versión le borraba el peso al título de un producto suelto.
+- **El caso del CVE sí se publicó** (`plugin-abandonado-con-cve`, tema Ciberseguridad), sin decir dónde se encontró el plugin ni si algún sitio lo usa. Datos verificados: el issue #3 del repositorio lo abrió el dueño en julio de 2025 y sigue sin respuesta; WordPress.org cerró el plugin el 2024-03-07 por seguridad; el último commit del repositorio es de agosto de 2020 (lo de diciembre de 2023 es un pull request ajeno, sin aceptar); el NVD le da 4,3 y Patchstack 8,8.
 
 ## Decisiones tomadas
 
