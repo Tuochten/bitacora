@@ -14,3 +14,9 @@
 /* Videos en las entradas (2026-10-15, post del GameCube): son verticales, así que van angostos y centrados */
 .prose figure.video{background:#000}
 .prose figure.video video{display:block;width:100%;max-width:420px;height:auto;margin:0 auto}
+
+/* Listas numeradas (2026-10-15): el diseño solo traía viñetas, y el <ol> quedaba con el número del navegador
+   fuera del margen y además con la ›. El número va en dorado donde va la ›, dentro del margen. */
+.prose ol{list-style:none;padding:0;counter-reset:paso}
+.prose ol>li{counter-increment:paso;padding-left:28px}
+.prose ol>li::before{content:counter(paso) ".";left:0;font-variant-numeric:tabular-nums}
