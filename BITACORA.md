@@ -17,7 +17,7 @@ Se construye con un flujo de dos agentes: **Claude Code dirige y revisa** (escri
 | Home adaptada a v2.1 | ✅ 9/9 piezas IDÉNTICAS, filtro igual al prototipo, 0 píxeles distintos (2026-09-29) |
 | Desarrollo web, Sobre mí, Contacto | ✅ 0 píxeles distintos a 1440 px; en Contacto solo difiere el reloj (muestra la hora actual). Formulario activo y probado en el preview (2026-10-12) |
 | Blog: listado, entradas (3 variantes), RSS y sitemap | ✅ IDÉNTICOS al prototipo, 0 píxeles distintos a 1440 y 390 px (2026-09-29, tarde) |
-| Contenido | ✅ 8 entradas reales y 4 proyectos; sin maqueta (2026-10-15) |
+| Contenido | ✅ 9 entradas reales y 4 proyectos; sin maqueta (2026-10-15) |
 | Publicación | ✅ En `wlaque.cl` desde el 2026-10-12 (rutas, una subcarpeta del hosting anterior excluida, `www` redirigido) |
 
 ## Cronología
@@ -99,6 +99,12 @@ El dueño entregó las páginas interiores (v2.1.0: blog con paginación, entrad
 - El proyecto Homelab ahora parte en **2025 →** (la torre de antes del notebook), por decisión del dueño.
 - Primer caso de trabajo anonimizado: `la-culpa-es-de-cloudflare` (TTFB vs. "la culpa es de Cloudflare"), revisado y aprobado por el dueño, publicado el mismo día. Sin cliente, dominio, persona, empresa ni nombre del servicio. El dueño revisa cada post de trabajo antes de publicarlo.
 - Post de la RTX 5080: a pedido del dueño, la sospecha principal pasó del cable a la RAM (la mezcla de 2×16 + 2×8 GB andaba al límite).
+
+### 2026-10-15 (noche) · GameCube y videos
+- Post `gamecube-segunda-vida` (fechado el 2026-10-04), armado con el handoff y el material que el dueño preparó en Claude Desktop, cruzado con el export (DOL-101 sin Serial Port 2, GC2SD en el slot B, Gamebit de 4,5 mm, el stick arreglado y el lector sin reparar). Se revisó que fotos y videos no traigan metadatos ni ubicación, y se pasó whisper por el audio: no hay voces.
+- **Primer post con video.** Va como HTML dentro del Markdown: `<figure class="video"><video …></video><figcaption>…</figcaption></figure>`. El estilo está en `ajustes.css` (angosto y centrado, porque son verticales). Solo 3 videos (17 MB en total); las fotos verticales van de a dos en una sola imagen para que no queden gigantes.
+- **Los assets de Workers no soportan Range** (devuelven 200 con el archivo entero) y Safari no reproduce video sin eso. Ahora los `.mp4` pasan por el Worker (`run_worker_first: "/*.mp4"`), que responde 206 cortando en memoria. Probado en local con `wrangler dev` (byte a byte) y en producción.
+- En zsh, `${r:+-H "Range: $r"}` no arma bien la cabecera de curl: la prueba con rangos devolvía 400 por culpa del shell, no del Worker.
 
 ## Decisiones tomadas
 
